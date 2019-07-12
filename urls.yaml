@@ -1,0 +1,105 @@
+kind: url
+name: "Dante: My Full DNA"
+url: "https://us.dantelabs.com/collections/our-tests/products/whole-genome-sequencing"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Dante: Whole GenomeZ"
+url: "https://us.dantelabs.com/collections/our-tests/products/whole-genomez"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Dante: Whole GenomeL"
+url: "https://us.dantelabs.com/collections/our-tests/products/long-reads-whole-genome-sequencing"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Veritas: myGenome Standard, Premium, Diagnostic"
+url: "https://www.veritasgenetics.com/myGenome"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Nebula"
+url: "https://portal.nebula.org/get-sequenced"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Full Genomes: 15x, 20x, 30x, Clinical, Long Read"
+url: "https://www.fullgenomes.com/whole-genome-sequencing/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Genomes Personalized Health: Whole Genome Sequencing"
+url: "https://genomicspersonalizedhealth.com/whole-genome-sequencing-analysis/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Gene by Gene: Whole Genome Sequencing"
+url: "https://www.genebygene.com/pages/research"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "YSEQ: Whole Genome Sequence 15x, 30x, 50x"
+url: "https://www.yseq.net/product_info.php?cPath=29&products_id=42468&osCsid=23a78b56dd32f26c5e986cf479814712"
+filter:
+  - css:
+      selector: html
+      exclude: script,img,.infoBoxContainer
+  - html2text:
+      method: pyhtml2text
