@@ -7,26 +7,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style type="text/css">
+      :root {
+        --accent: #1a6b5a;
+        --accent-light: #e8f5f1;
+        --header-bg: #1b2a4a;
+        --text-primary: #1a1a2e;
+        --text-secondary: #555;
+        --border: #e2e8f0;
+        --row-hover: #f1f5f9;
+        --row-stripe: #f8fafc;
+      }
+
       html {
         font-size: 12px;
       }
 
       @media (min-width: 768px) {
         html {
-          font-size: 14px;
+          font-size: 13px;
         }
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: var(--text-primary);
+        background: #f5f7fa;
       }
 
       .main-header {
         max-width: 800px;
+        padding-top: 3rem;
+        padding-bottom: 2rem;
+      }
+
+      .main-header h1 {
+        font-weight: 700;
+        font-size: 2.5rem;
+        letter-spacing: -0.02em;
+        color: var(--header-bg);
       }
 
       .lead {
         max-width: 620px;
         margin-left: auto;
         margin-right: auto;
+        color: var(--text-secondary);
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
+
+      .lead em {
+        color: var(--accent);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .updated-note {
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+        color: #888;
+      }
+
+      .table-wrapper {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+        overflow-x: auto;
+        margin: 0 1rem 2rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #services-table {
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      #services-table thead th {
+        background: var(--header-bg);
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.75rem 0.75rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        cursor: pointer;
+        user-select: none;
+        white-space: nowrap;
+        transition: background-color 0.15s;
+      }
+
+      #services-table thead th:first-child {
+        border-radius: 8px 0 0 0;
+      }
+
+      #services-table thead th:last-child {
+        border-radius: 0 8px 0 0;
+      }
+
+      #services-table thead th:hover {
+        background: #243a60;
+      }
+
+      #services-table thead th abbr {
+        color: inherit;
+        text-decoration-color: rgba(255, 255, 255, 0.4);
       }
 
       #services-table tr th:nth-child(7),
@@ -43,13 +137,104 @@
         text-align: center !important;
       }
 
+      #services-table tbody td {
+        padding: 0.65rem 0.75rem;
+        border-top: 1px solid var(--border);
+        vertical-align: top;
+        font-size: 0.92rem;
+      }
+
+      #services-table tbody tr:nth-child(even):not(.defunct) {
+        background: var(--row-stripe);
+      }
+
+      #services-table tbody tr:not(.defunct):hover {
+        background: var(--row-hover);
+      }
+
+      #services-table tbody td:first-child {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      #services-table tbody td a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      #services-table tbody td a:hover {
+        text-decoration: underline;
+      }
+
+      tr.defunct td {
+        color: #aaa;
+        font-size: 0.85rem;
+      }
+
+      tr.defunct td:first-child {
+        text-decoration: line-through;
+      }
+
+      .status-note {
+        font-style: italic;
+        font-size: 0.82em;
+        display: block;
+        margin-top: 0.25em;
+        color: #7c6f27;
+        line-height: 1.4;
+      }
+
+      .caution-note {
+        font-style: italic;
+        font-size: 0.82em;
+        display: block;
+        margin-top: 0.25em;
+        color: #c0392b;
+        line-height: 1.4;
+      }
+
+      .sort-arrow {
+        font-size: 0.7em;
+        margin-left: 0.3em;
+        opacity: 0.85;
+      }
+
+      .sort-hint {
+        font-size: 0.6em;
+        margin-left: 0.3em;
+        opacity: 0.35;
+        vertical-align: middle;
+      }
+
       .help-wanted {
-        margin-bottom: 1em;
+        margin-bottom: 2em;
+      }
+
+      .help-wanted h4 {
+        font-weight: 600;
+        color: var(--header-bg);
+      }
+
+      .help-wanted ul {
+        color: var(--text-secondary);
+        line-height: 1.7;
       }
 
       .footer {
-        background-color: #eee;
-        padding: 0.75em;
+        background: var(--header-bg);
+        color: rgba(255, 255, 255, 0.7);
+        padding: 1.25rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .footer a {
+        color: #fff;
+        font-weight: 500;
+      }
+
+      .footer a:hover {
+        color: var(--accent-light);
       }
     </style>
   </head>
@@ -63,9 +248,11 @@
         great way to compare them. <em>Which Genome</em> is an open attempt to
         change that.
       </p>
+
+      <p class="updated-note">Last updated April 2026. Click any column header to sort.</p>
     </div>
 
-    <div class="container-fluid">
+    <div class="table-wrapper">
       <table class="table" id="services-table">
         <thead>
           <tr>
@@ -87,18 +274,21 @@
         </thead>
 
         <tbody>
+          <!-- Active providers, sorted by lowest-priced product -->
+
           <tr>
-            <td>Nebula Genomics</td>
-            <td>
-              <a href="https://portal.nebula.org/get-sequenced">Low-pass Whole Genome Sequencing</a>
+            <td>Gencove</td>
+            <td data-sort="Low-pass WGS with Imputation">
+              <a href="https://gencove.com">Low-pass WGS with Imputation</a>
+              <span class="status-note">Educational/informational only, not diagnostic. US only.</span>
             </td>
-            <td>0.4X</td>
-            <td>$149</td>
-            <td>8 weeks</td>
+            <td data-sort="0.7">~0.4&ndash;1x</td>
+            <td data-sort="49">$49</td>
+            <td data-sort="3.5">3&ndash;4 weeks</td>
             <td></td>
             <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -107,326 +297,247 @@
           </tr>
 
           <tr>
-            <td>Sano Genetics</td>
-            <td>
-              <a href="https://sanogenetics.com/dna-kit">Whole Genome</a>
+            <td>TellmeGen</td>
+            <td data-sort="Ultra WGS">
+              <a href="https://www.tellmegen.com">Ultra WGS</a>
+              <span class="status-note">Includes 1 year tellmeGen+ subscription (€19.99/yr renewal). 15+ languages. Free round-trip shipping within country of purchase.</span>
             </td>
-            <td>30x</td>
-            <td>£950 (additional £125 discount if you already have genetic data)</td>
-            <td>10-12 weeks</td>
+            <td data-sort="30">30x</td>
+            <td data-sort="325">~€309 (~$299&ndash;349)</td>
+            <td data-sort="5">4&ndash;6 weeks</td>
             <td>150bp</td>
             <td>✅️</td>
-            <td>✅️</td>
+            <td></td>
             <td>✅️</td>
             <td></td>
-            <td></td>
+            <td>ISO 17025/13485/15189</td>
             <td>Illumina</td>
-            <td></td>
-            <td></td>
+            <td>Saliva swab</td>
+            <td>Valencia, Spain</td>
           </tr>
 
           <tr>
             <td>Dante Labs</td>
-            <td>
-              <a href="https://us.dantelabs.com/collections/frontpage/products/whole-genome-sequencing">
-                Whole Genome Sequencing Test: Intro
-              </a>
+            <td data-sort="Dante Genome Test">
+              <a href="https://www.dantelabs.com">Dante Genome Test</a>
+              <span class="status-note">Stated turnaround 6&ndash;8 weeks; widespread reports of 6+ month delays.</span>
             </td>
-            <td>4X</td>
-            <td>$149 ($199 for 2 week turnaround)</td>
-            <td>2 or 8 weeks depending on price</td>
+            <td data-sort="30">30x</td>
+            <td data-sort="399">$399</td>
+            <td data-sort="7">6&ndash;8 weeks</td>
             <td>150bp</td>
             <td>✅️</td>
             <td>✅️</td>
             <td>✅️</td>
             <td></td>
-            <td>CAP/CLIA</td>
+            <td>CAP/CLIA/ISO 15189</td>
             <td>Illumina</td>
             <td></td>
-            <td>In-house</td>
+            <td>L'Aquila, Italy</td>
           </tr>
 
           <tr>
-            <td>Dante Labs</td>
-            <td>
-              <a href="https://us.dantelabs.com/collections/frontpage/products/whole-genome-sequencing">
-                Whole Genome Sequencing Test: Premium
-              </a>
+            <td>Sequencing.com</td>
+            <td data-sort="Whole Genome Sequencing">
+              <a href="https://sequencing.com">Whole Genome Sequencing</a>
+              <span class="status-note">Base bundle includes 10 reports. Additional reports via app marketplace ($19&ndash;$129/mo subscriptions). Accepts uploads from 23andMe, AncestryDNA, etc.</span>
             </td>
-            <td>30X</td>
-            <td>$449 ($949 for 2 week turnaround)</td>
-            <td>2 or 8 weeks depending on price</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
+            <td data-sort="30">30x</td>
+            <td data-sort="399">$399</td>
+            <td data-sort="6">Several weeks</td>
             <td></td>
-            <td>CAP/CLIA</td>
-            <td>Illumina</td>
-            <td></td>
-            <td>In-house</td>
-          </tr>
-
-          <tr>
-            <td>Dante Labs</td>
-            <td>
-              <a href="https://us.dantelabs.com/collections/frontpage/products/whole-genome-sequencing">
-                Whole Genome Sequencing Test: Super Premium
-              </a>
-            </td>
-            <td>130X exome, 30X genome</td>
-            <td>$999 ($1,499 for 2 week turnaround)</td>
-            <td>2 or 8 weeks depending on price</td>
-            <td>150bp</td>
             <td>✅️</td>
             <td>✅️</td>
             <td>✅️</td>
             <td></td>
             <td>CAP/CLIA</td>
             <td>Illumina</td>
-            <td></td>
-            <td>In-house</td>
+            <td>Cheek swab</td>
+            <td>US-based</td>
           </tr>
 
           <tr>
-            <td>Dante Labs</td>
-            <td>
-              <a href="https://us.dantelabs.com/collections/our-tests/products/whole-genomez">
-                Whole GenomeZ
-              </a>
+            <td>Nucleus Genomics</td>
+            <td data-sort="30x Whole Genome Sequencing">
+              <a href="https://mynucleus.com">30x Whole Genome Sequencing</a>
+              <span class="status-note">800+ risk scores. Integrates non-genetic factors for absolute risk. AI health assistant. $14M Series A (Founders Fund).</span>
             </td>
-            <td>130X exome, 30X genome</td>
-            <td>$899 (sale price)</td>
-            <td>10-12 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
+            <td data-sort="30">30x</td>
+            <td data-sort="438">$399 + $39/yr</td>
+            <td data-sort="5">4&ndash;6 weeks</td>
+            <td></td>
             <td>✅️</td>
             <td></td>
-            <td>CAP/CLIA</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>Veritas Genetics</td>
-            <td>
-              <a href="https://www.veritasgenetics.com/myGenome">myGenome Standard</a>
-            </td>
-            <td>30X</td>
-            <td>$599</td>
-            <td>16 weeks</td>
-            <td>150bp</td>
-            <td><span data-toggle="tooltip" title="Additional cost: $99">⚠️ </span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>CAP/CLIA</td>
-            <td>Illumina HiSeq X10 &amp; NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td>In-house (Danvers, MA)</td>
-          </tr>
-
-          <tr>
-            <td>Veritas Genetics</td>
-            <td>
-              <a href="https://www.veritasgenetics.com/myGenome">myGenome Premium</a>
-            </td>
-            <td>30X</td>
-            <td>$1,599</td>
-            <td>16 weeks</td>
-            <td>150bp</td>
-            <td><span data-toggle="tooltip" title="Additional cost: $99">⚠️ </span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>CAP/CLIA</td>
-            <td>Illumina HiSeq X10 &amp; NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td>In-house (Danvers, MA)</td>
-          </tr>
-
-          <tr>
-            <td>Veritas Genetics</td>
-            <td>
-              <a href="https://www.veritasgenetics.com/myGenome">myGenome Diagnostic</a>
-            </td>
-            <td>30X</td>
-            <td>$2,999</td>
-            <td>16 weeks</td>
-            <td>150bp</td>
-            <td><span data-toggle="tooltip" title="Additional cost: $99">⚠️ </span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>CAP/CLIA</td>
-            <td>Illumina HiSeq X10 &amp; NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td>In-house (Danvers, MA)</td>
-          </tr>
-
-          <tr>
-            <td>Full Genomes Corporation</td>
-            <td>
-              <a href="https://www.fullgenomes.com/whole-genome-sequencing/">Whole Genome Sequencing 15x</a>
-            </td>
-            <td>15X</td>
-            <td>$545</td>
-            <td>12-16 weeks</td>
-            <td>150bp</td>
             <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="Optional via SteadyMD, $99">⚠️ </span></td>
             <td>CLIA</td>
-            <td>Illumina HiSeq X10</td>
+            <td>Illumina NovaSeq X Plus</td>
+            <td>Cheek swab</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>YSEQ</td>
+            <td data-sort="WGS (45 Gbases, ~15x)">
+              <a href="https://www.yseq.net">WGS (45 Gbases, ~15x)</a>
+            </td>
+            <td data-sort="15">~15x</td>
+            <td data-sort="399">€359 (~$399)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>✅️</td>
+            <td></td>
+            <td></td>
+            <td>Illumina NovaSeq 6000 / MGI DNB 400 / MGI DNB T7</td>
             <td>Saliva</td>
-            <td><a href="https://en.novogene.com/">Novogene</a></td>
+            <td><a href="https://www.cegat.de/en/">CeGaT</a> / In-house (Berlin) / Riga, Latvia</td>
           </tr>
 
           <tr>
-            <td>Full Genomes Corporation</td>
-            <td>
-              <a href="https://www.fullgenomes.com/whole-genome-sequencing/">Whole Genome Sequencing 20x</a>
+            <td>YSEQ</td>
+            <td data-sort="WGS400 (400bp single-end)">
+              <a href="https://www.yseq.net">WGS400 (400bp single-end)</a>
             </td>
-            <td>20X</td>
-            <td>$750</td>
-            <td>12-16 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
+            <td></td>
+            <td data-sort="399">$399</td>
+            <td></td>
+            <td>400bp (single-end)</td>
+            <td></td>
+            <td></td>
             <td>✅️</td>
             <td></td>
-            <td>CLIA</td>
-            <td>Illumina HiSeq X10</td>
+            <td></td>
+            <td>MGI DNB 400</td>
             <td>Saliva</td>
-            <td><a href="https://en.novogene.com/">Novogene</a></td>
+            <td>In-house (Berlin)</td>
           </tr>
 
           <tr>
-            <td>Full Genomes Corporation</td>
-            <td>
-              <a href="https://www.fullgenomes.com/whole-genome-sequencing/">Whole Genome Sequencing 30x</a>
+            <td>DNA Complete</td>
+            <td data-sort="Essential (1x WGS)">
+              <a href="https://dnacomplete.com">Essential (1x WGS)</a>
+              <span class="caution-note">Caution: ProPhase Labs (parent) filed Chapter 11. Reports of spotty delivery and questionable data quality.</span>
             </td>
-            <td>30X</td>
-            <td>$1,150</td>
-            <td>12-16 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
+            <td data-sort="1">1x</td>
+            <td data-sort="245">$245</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>DNA Complete</td>
+            <td data-sort="Pro (30x WGS)">
+              <a href="https://dnacomplete.com">Pro (30x WGS)</a>
+              <span class="caution-note">Caution: reports suggest results may not be true 30x WGS.</span>
+            </td>
+            <td data-sort="30">30x</td>
+            <td data-sort="595">$595</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>DNA Complete</td>
+            <td data-sort="Elite (100x WGS)">
+              <a href="https://dnacomplete.com">Elite (100x WGS)</a>
+            </td>
+            <td data-sort="100">100x</td>
+            <td data-sort="1195">$1,195</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>YSEQ</td>
+            <td data-sort="WGS+ (90 Gbases, ~30x)">
+              <a href="https://www.yseq.net">WGS+ (90 Gbases, ~30x)</a>
+            </td>
+            <td data-sort="30">~30x</td>
+            <td data-sort="929">~$929</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>✅️</td>
             <td></td>
-            <td>CLIA</td>
-            <td>Illumina HiSeq X10</td>
+            <td></td>
+            <td>Illumina NovaSeq 6000 / MGI DNB 400 / MGI DNB T7</td>
             <td>Saliva</td>
-            <td><a href="https://en.novogene.com/">Novogene</a></td>
+            <td><a href="https://www.cegat.de/en/">CeGaT</a> / In-house (Berlin) / Riga, Latvia</td>
           </tr>
 
           <tr>
-            <td>Full Genomes Corporation</td>
-            <td>
-              <a href="https://www.fullgenomes.com/whole-genome-sequencing/">Clinical Whole Genome 30x</a>
+            <td>24Genetics</td>
+            <td data-sort="Whole Exome Sequencing">
+              <a href="https://24genetics.com">Whole Exome Sequencing</a>
             </td>
-            <td>30X</td>
-            <td>$1,800</td>
-            <td>12-16 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>CLIA</td>
-            <td>Illumina HiSeq X10</td>
-            <td>Saliva</td>
-            <td><a href="https://en.novogene.com/">Novogene</a></td>
-          </tr>
-
-          <tr>
-            <td>Full Genomes Corporation</td>
-            <td>
-              <a href="https://www.fullgenomes.com/whole-genome-sequencing/">Whole Genome 250bp Reads</a>
-            </td>
-            <td></td>
-            <td>$1,900</td>
-            <td></td>
-            <td>250bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td>CLIA</td>
+            <td>~85% exome</td>
+            <td data-sort="1200">€999 (~$1,200)</td>
+            <td data-sort="5.5">3&ndash;8 weeks</td>
             <td></td>
             <td></td>
             <td></td>
-          </tr>
-
-          <tr>
-            <td>Full Genomes Corporation</td>
-            <td>
-              <a href="https://www.fullgenomes.com/whole-genome-sequencing/">Long Read Whole Genome</a>
-            </td>
-            <td>30X</td>
-            <td>$2,900</td>
-            <td>12-16 weeks</td>
-            <td>150bp-based <a href="https://community.10xgenomics.com/t5/10x-Blog/A-basic-introduction-to-linked-reads/ba-p/95">linked reads</a></td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td>CLIA</td>
-            <td>10x Genomics Chromium + Illumina HiSeq X10</td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>Genomics Personalized Health</td>
-            <td>
-              <a href="https://genomicspersonalizedhealth.com/whole-genome-sequencing-analysis/">Whole Genome Sequencing</a>
-            </td>
-            <td>30X</td>
-            <td>$1,499</td>
-            <td>6 weeks</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>✅️</td>
-            <td></td>
-            <td>CAP/CLIA</td>
-            <td>Illumina HiSeq X &amp; Illumina NovaSeq</td>
             <td></td>
             <td></td>
+            <td>Madrid / Boston / Cambridge, UK</td>
           </tr>
 
           <tr>
             <td>Gene by Gene</td>
-            <td>
+            <td data-sort="Whole Genome Sequencing">
               <a href="https://www.genebygene.com/pages/research">Whole Genome Sequencing</a>
+              <span class="status-note">Primarily B2B; no public consumer pricing. Major partnership with MyHeritage (1M+ tests/yr on Ultima Genomics).</span>
             </td>
-            <td>30X</td>
-            <td>$2,895</td>
-            <td></td>
+            <td data-sort="30">30x</td>
+            <td>Inquire for pricing</td>
+            <td data-sort="2.5">10&ndash;15 business days</td>
             <td></td>
             <td></td>
             <td></td>
             <td>✅️</td>
             <td></td>
             <td>CAP/CLIA</td>
-            <td>Illumina HiSeq</td>
-            <td>Blood</td>
+            <td>Ultima UG100 + Illumina</td>
+            <td>Buccal swab</td>
             <td></td>
           </tr>
 
           <tr>
             <td>YSEQ</td>
-            <td>
-              <a href="https://www.yseq.net/product_info.php?cPath=29&products_id=42468&osCsid=23a78b56dd32f26c5e986cf479814712">
-                Whole Genome Sequence 15x
-              </a>
+            <td data-sort="WGS++ (150 Gbases, ~50x)">
+              <a href="https://www.yseq.net">WGS++ (150 Gbases, ~50x)</a>
             </td>
-            <td>15x</td>
-            <td>$740</td>
+            <td data-sort="50">~50x</td>
+            <td data-sort="1559">~$1,559</td>
             <td></td>
             <td></td>
             <td></td>
@@ -434,20 +545,20 @@
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td>Illumina NovaSeq 6000</td>
+            <td>Illumina NovaSeq 6000 / MGI DNB 400 / MGI DNB T7</td>
             <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a></td>
+            <td><a href="https://www.cegat.de/en/">CeGaT</a> / In-house (Berlin) / Riga, Latvia</td>
           </tr>
 
           <tr>
-            <td>YSEQ</td>
-            <td>
-              <a href="https://www.yseq.net/product_info.php?cPath=29&products_id=42468&osCsid=23a78b56dd32f26c5e986cf479814712">
-                Whole Genome Sequence 30x
-              </a>
+            <td>24Genetics</td>
+            <td data-sort="Whole Genome Sequencing">
+              <a href="https://24genetics.com">Whole Genome Sequencing</a>
+              <span class="status-note">Includes two 15-minute genetic counseling sessions and a personalized report on a gene/disease of choice.</span>
             </td>
-            <td>30x</td>
-            <td>$1,340</td>
+            <td data-sort="30">100%</td>
+            <td data-sort="2400">€1,999 (~$2,400)</td>
+            <td data-sort="5.5">3&ndash;8 weeks</td>
             <td></td>
             <td></td>
             <td></td>
@@ -455,20 +566,39 @@
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a></td>
+            <td></td>
+            <td>Madrid / Boston / Cambridge, UK</td>
           </tr>
 
           <tr>
-            <td>YSEQ</td>
-            <td>
-              <a href="https://www.yseq.net/product_info.php?cPath=29&products_id=42468&osCsid=23a78b56dd32f26c5e986cf479814712">
-                Whole Genome Sequence 50x
-              </a>
+            <td>GenePlanet</td>
+            <td data-sort="Premium WGS">
+              <a href="https://geneplanet.com">Premium WGS</a>
+              <span class="status-note">Raw data not included by default (~€50 extra). Pricing not transparently listed.</span>
             </td>
-            <td>50x</td>
-            <td>$2,170</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Slovenia (Europe primarily)</td>
+          </tr>
+
+          <tr>
+            <td>Veritas Intercontinental</td>
+            <td data-sort="myGenome">
+              <a href="https://www.veritasint.com">myGenome</a>
+              <span class="status-note">Physician-mediated model (not pure DTC). Available in 30+ countries (Europe, Latin America, UAE). Pricing not publicly listed.</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -476,15 +606,109 @@
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a></td>
+            <td></td>
+            <td>Barcelona, Spain</td>
           </tr>
 
-          <!-- 23andMe referral URL (10% off): https://refer.23andme.com/s/di53m -->
+          <!-- Defunct / inactive providers -->
+
+          <tr class="defunct">
+            <td>Nebula Genomics</td>
+            <td>
+              Shut down February 2025. ProPhase Labs filed Chapter 11. See DNA Complete as successor.
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr class="defunct">
+            <td>Sano Genetics</td>
+            <td>
+              No longer offering consumer WGS. Pivoted to B2B precision medicine / clinical trials.
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr class="defunct">
+            <td>Veritas Genetics (US)</td>
+            <td>
+              Acquired by LetsGetChecked, March 2022. US consumer service discontinued. See Veritas Intercontinental for international availability.
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr class="defunct">
+            <td>Full Genomes Corporation</td>
+            <td>
+              Likely defunct. Website inaccessible, no evidence of active operations. Listed as "Out of Business" by PitchBook.
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr class="defunct">
+            <td>Genomics Personalized Health</td>
+            <td>
+              Likely inactive. Website has SSL errors, no recent activity found.
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
-    </div>
+    </div><!-- .table-wrapper -->
 
     <div class="container help-wanted">
       <div class="row">
@@ -521,7 +745,59 @@
 
     <script>
       $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
+
+        var $table = $('#services-table');
+        var $headers = $table.find('thead th');
+
+        $headers.each(function () {
+          $(this).append('<span class="sort-hint">\u25B2\u25BC</span>');
+        });
+
+        $headers.on('click', function () {
+          var $th = $(this);
+          var colIndex = $th.index();
+          var currentDir = $th.attr('data-sort-dir');
+          var newDir = currentDir === 'asc' ? 'desc' : 'asc';
+
+          $headers.removeAttr('data-sort-dir').find('.sort-arrow').remove();
+          $headers.find('.sort-hint').show();
+          $th.find('.sort-hint').hide();
+          $th.attr('data-sort-dir', newDir);
+          $th.append('<span class="sort-arrow">' + (newDir === 'asc' ? ' \u25B2' : ' \u25BC') + '</span>');
+
+          var $tbody = $table.find('tbody');
+          var rows = $tbody.find('tr:not(.defunct)').toArray();
+          var defunct = $tbody.find('tr.defunct').toArray();
+
+          rows.sort(function (a, b) {
+            var aCell = $(a).children('td').eq(colIndex);
+            var bCell = $(b).children('td').eq(colIndex);
+            var aVal = aCell.attr('data-sort');
+            var bVal = bCell.attr('data-sort');
+
+            if (aVal === undefined) aVal = aCell.text().trim();
+            if (bVal === undefined) bVal = bCell.text().trim();
+
+            var aEmpty = aVal === '';
+            var bEmpty = bVal === '';
+            if (aEmpty && bEmpty) return 0;
+            if (aEmpty) return 1;
+            if (bEmpty) return -1;
+
+            var aNum = parseFloat(aVal);
+            var bNum = parseFloat(bVal);
+            if (!isNaN(aNum) && !isNaN(bNum)) {
+              return newDir === 'asc' ? aNum - bNum : bNum - aNum;
+            }
+
+            var cmp = aVal.localeCompare(bVal);
+            return newDir === 'asc' ? cmp : -cmp;
+          });
+
+          $.each(rows, function (_, row) { $tbody.append(row); });
+          $.each(defunct, function (_, row) { $tbody.append(row); });
+        });
       })
     </script>
   </body>
