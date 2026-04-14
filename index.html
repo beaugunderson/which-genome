@@ -102,7 +102,6 @@
         z-index: 10;
         cursor: pointer;
         user-select: none;
-        white-space: nowrap;
         transition: background-color 0.15s;
       }
 
@@ -260,13 +259,13 @@
             <th scope="col">Product</th>
             <th scope="col">Coverage</th>
             <th scope="col">Price</th>
-            <th scope="col">Turnaround</th>
-            <th scope="col">Read Length</th>
+            <th scope="col">Turn&shy;around</th>
+            <th scope="col">Read<br>Length</th>
             <th scope="col" class="text-center"><abbr title="variant call format">VCF</abbr></th>
             <th scope="col" class="text-center"><abbr title="binary sequence alignment map format">BAM</abbr></th>
             <th scope="col" class="text-center">FASTQ</th>
-            <th scope="col">Genetic Counseling</th>
-            <th scope="col"><abbr title="College of American Pathologists accredited">CAP</abbr>/<abbr title="Clinical Laboratory Improvement Amendments certified">CLIA</abbr></th>
+            <th scope="col">Genetic<br>Counseling</th>
+            <th scope="col"><abbr title="College of American Pathologists accredited">CAP</abbr>/<wbr><abbr title="Clinical Laboratory Improvement Amendments certified">CLIA</abbr></th>
             <th scope="col">Hardware</th>
             <th scope="col">Sample</th>
             <th scope="col">Lab</th>
@@ -280,20 +279,20 @@
             <td>Gencove</td>
             <td data-sort="Low-pass WGS with Imputation">
               <a href="https://gencove.com">Low-pass WGS with Imputation</a>
-              <span class="status-note">Educational/informational only, not diagnostic. US only.</span>
+              <span class="status-note">Educational/informational only, not diagnostic. US only. Early access pricing.</span>
             </td>
             <td data-sort="0.7">~0.4&ndash;1x</td>
             <td data-sort="49">$49</td>
             <td data-sort="3.5">3&ndash;4 weeks</td>
-            <td></td>
+            <td>150bp</td>
+            <td>✅️</td>
+            <td>✅️</td>
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Illumina / BGI DNBseq</td>
+            <td>Cheek swab</td>
+            <td>New York, NY</td>
           </tr>
 
           <tr>
@@ -303,17 +302,17 @@
               <span class="status-note">Includes 1 year tellmeGen+ subscription (€19.99/yr renewal). 15+ languages. Free round-trip shipping within country of purchase.</span>
             </td>
             <td data-sort="30">30x</td>
-            <td data-sort="325">~€309 (~$299&ndash;349)</td>
+            <td data-sort="299">€299 (~$299&ndash;349)</td>
             <td data-sort="5">4&ndash;6 weeks</td>
             <td>150bp</td>
             <td>✅️</td>
             <td></td>
             <td>✅️</td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="Add-on from ~$29, not included with test">⚠️ </span></td>
             <td>ISO 17025/13485/15189</td>
-            <td>Illumina</td>
+            <td>Illumina (via Eurofins Genomics)</td>
             <td>Saliva swab</td>
-            <td>Valencia, Spain</td>
+            <td>Denmark (Eurofins Genomics)</td>
           </tr>
 
           <tr>
@@ -331,8 +330,8 @@
             <td>✅️</td>
             <td></td>
             <td>CAP/CLIA/ISO 15189</td>
-            <td>Illumina</td>
-            <td></td>
+            <td>Illumina NovaSeq 6000</td>
+            <td>Saliva</td>
             <td>L'Aquila, Italy</td>
           </tr>
 
@@ -344,8 +343,8 @@
             </td>
             <td data-sort="30">30x</td>
             <td data-sort="399">$399</td>
-            <td data-sort="6">Several weeks</td>
-            <td></td>
+            <td data-sort="8">Under 8 weeks</td>
+            <td>150bp</td>
             <td>✅️</td>
             <td>✅️</td>
             <td>✅️</td>
@@ -353,7 +352,7 @@
             <td>CAP/CLIA</td>
             <td>Illumina</td>
             <td>Cheek swab</td>
-            <td>US-based</td>
+            <td>Pasadena, CA (HQ)</td>
           </tr>
 
           <tr>
@@ -363,17 +362,17 @@
               <span class="status-note">800+ risk scores. Integrates non-genetic factors for absolute risk. AI health assistant. $14M Series A (Founders Fund).</span>
             </td>
             <td data-sort="30">30x</td>
-            <td data-sort="438">$399 + $39/yr</td>
+            <td data-sort="538">$499 + $39/yr</td>
             <td data-sort="5">4&ndash;6 weeks</td>
-            <td></td>
+            <td>150bp</td>
             <td>✅️</td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="CRAM format (compressed BAM equivalent)">✅️</span></td>
             <td>✅️</td>
             <td><span data-toggle="tooltip" title="Optional via SteadyMD, $99">⚠️ </span></td>
             <td>CLIA</td>
             <td>Illumina NovaSeq X Plus</td>
             <td>Cheek swab</td>
-            <td></td>
+            <td>US-based</td>
           </tr>
 
           <tr>
@@ -383,94 +382,95 @@
             </td>
             <td data-sort="15">~15x</td>
             <td data-sort="399">€359 (~$399)</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td data-sort="26"><span data-toggle="tooltip" title="FAQ states 5-7 months currently">5&ndash;7 months</span></td>
+            <td>100&ndash;150bp</td>
+            <td><span data-toggle="tooltip" title="Y-chromosome SNP VCF annotation">⚠️ </span></td>
+            <td>✅️</td>
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td>Illumina NovaSeq 6000 / MGI DNB 400 / MGI DNB T7</td>
+            <td>Illumina NovaSeq 6000</td>
             <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a> / In-house (Berlin) / Riga, Latvia</td>
+            <td><a href="https://www.cegat.de/en/">CeGaT</a> (T&uuml;bingen) / In-house (Berlin)</td>
           </tr>
 
-          <tr>
-            <td>YSEQ</td>
-            <td data-sort="WGS400 (400bp single-end)">
-              <a href="https://www.yseq.net">WGS400 (400bp single-end)</a>
+          <tr class="defunct">
+            <td>YSEQ WGS400</td>
+            <td>
+              Discontinued. Product page no longer available.
             </td>
             <td></td>
-            <td data-sort="399">$399</td>
-            <td></td>
-            <td>400bp (single-end)</td>
             <td></td>
             <td></td>
-            <td>✅️</td>
             <td></td>
             <td></td>
-            <td>MGI DNB 400</td>
-            <td>Saliva</td>
-            <td>In-house (Berlin)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
 
           <tr>
             <td>DNA Complete</td>
             <td data-sort="Essential (1x WGS)">
               <a href="https://dnacomplete.com">Essential (1x WGS)</a>
-              <span class="caution-note">Caution: ProPhase Labs (parent) filed Chapter 11. Reports of spotty delivery and questionable data quality.</span>
+              <span class="caution-note">Caution: ProPhase Labs (parent) filed Chapter 11 for lab subsidiaries. In-house lab shut down; now outsources sequencing. Widespread reports of 6&ndash;12+ month delays, with many customers never receiving results. 1.3/5 on Trustpilot (89 reviews). Ships to 130+ countries (international return shipping at customer expense).</span>
             </td>
             <td data-sort="1">1x</td>
             <td data-sort="245">$245</td>
+            <td data-sort="12">~12 weeks (advertised; actual often 6&ndash;12+ months)</td>
+            <td>150bp</td>
+            <td>✅️</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="Optional add-on via Grey Genetics, LLC. Elite tier includes discounted access.">⚠️ </span></td>
+            <td>CLIA</td>
+            <td>MGI DNBSEQ-T7</td>
+            <td>Cheek swab</td>
+            <td>Garden City, NY (now outsourced)</td>
           </tr>
 
           <tr>
             <td>DNA Complete</td>
             <td data-sort="Pro (30x WGS)">
               <a href="https://dnacomplete.com">Pro (30x WGS)</a>
-              <span class="caution-note">Caution: reports suggest results may not be true 30x WGS.</span>
+              <span class="caution-note">Caution: H600 Project reports results may only achieve 80&ndash;90% genome coverage rather than true 30x WGS.</span>
             </td>
             <td data-sort="30">30x</td>
             <td data-sort="595">$595</td>
+            <td data-sort="12">~12 weeks (advertised; actual often 6&ndash;12+ months)</td>
+            <td>150bp</td>
+            <td>✅️</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="Optional add-on via Grey Genetics, LLC. Elite tier includes discounted access.">⚠️ </span></td>
+            <td>CLIA</td>
+            <td>MGI DNBSEQ-T7</td>
+            <td>Cheek swab</td>
+            <td>Garden City, NY (now outsourced)</td>
           </tr>
 
           <tr>
             <td>DNA Complete</td>
             <td data-sort="Elite (100x WGS)">
               <a href="https://dnacomplete.com">Elite (100x WGS)</a>
+              <span class="caution-note">Includes genetic counseling (discounted). Same delivery concerns as other tiers.</span>
             </td>
             <td data-sort="100">100x</td>
             <td data-sort="1195">$1,195</td>
+            <td data-sort="12">~12 weeks (advertised; actual often 6&ndash;12+ months)</td>
+            <td>150bp</td>
+            <td>✅️</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="Discounted access to Grey Genetics, LLC counseling included with Elite.">✅️</span></td>
+            <td>CLIA</td>
+            <td>MGI DNBSEQ-T7</td>
+            <td>Cheek swab</td>
+            <td>Garden City, NY (now outsourced)</td>
           </tr>
 
           <tr>
@@ -479,17 +479,17 @@
               <a href="https://www.yseq.net">WGS+ (90 Gbases, ~30x)</a>
             </td>
             <td data-sort="30">~30x</td>
-            <td data-sort="929">~$929</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td data-sort="440">€399 (~$440)</td>
+            <td data-sort="26"><span data-toggle="tooltip" title="FAQ states 5-7 months currently">5&ndash;7 months</span></td>
+            <td>100&ndash;150bp</td>
+            <td><span data-toggle="tooltip" title="Y-chromosome SNP VCF annotation">⚠️ </span></td>
+            <td>✅️</td>
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td>Illumina NovaSeq 6000 / MGI DNB 400 / MGI DNB T7</td>
+            <td>Illumina NovaSeq 6000</td>
             <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a> / In-house (Berlin) / Riga, Latvia</td>
+            <td><a href="https://www.cegat.de/en/">CeGaT</a> (T&uuml;bingen) / In-house (Berlin)</td>
           </tr>
 
           <tr>
@@ -499,15 +499,15 @@
             </td>
             <td>~85% exome</td>
             <td data-sort="1200">€999 (~$1,200)</td>
-            <td data-sort="5.5">3&ndash;8 weeks</td>
+            <td data-sort="4.5">3&ndash;6 weeks</td>
+            <td>150bp</td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>CE-IVD / ISO 9001 / ISO 13485</td>
+            <td>Illumina</td>
+            <td>Saliva</td>
             <td>Madrid / Boston / Cambridge, UK</td>
           </tr>
 
@@ -520,15 +520,15 @@
             <td data-sort="30">30x</td>
             <td>Inquire for pricing</td>
             <td data-sort="2.5">10&ndash;15 business days</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>150bp</td>
+            <td><span data-toggle="tooltip" title="Raw FASTQ only; no variant calling included">&#10060;</span></td>
+            <td><span data-toggle="tooltip" title="Raw FASTQ only; no alignment included">&#10060;</span></td>
             <td>✅️</td>
             <td></td>
             <td>CAP/CLIA</td>
             <td>Ultima UG100 + Illumina</td>
             <td>Buccal swab</td>
-            <td></td>
+            <td>Houston, TX</td>
           </tr>
 
           <tr>
@@ -537,17 +537,17 @@
               <a href="https://www.yseq.net">WGS++ (150 Gbases, ~50x)</a>
             </td>
             <td data-sort="50">~50x</td>
-            <td data-sort="1559">~$1,559</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td data-sort="770">€699 (~$770)</td>
+            <td data-sort="26"><span data-toggle="tooltip" title="FAQ states 5-7 months currently">5&ndash;7 months</span></td>
+            <td>100&ndash;150bp</td>
+            <td><span data-toggle="tooltip" title="Y-chromosome SNP VCF annotation">⚠️ </span></td>
+            <td>✅️</td>
             <td>✅️</td>
             <td></td>
             <td></td>
-            <td>Illumina NovaSeq 6000 / MGI DNB 400 / MGI DNB T7</td>
+            <td>Illumina NovaSeq 6000</td>
             <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a> / In-house (Berlin) / Riga, Latvia</td>
+            <td><a href="https://www.cegat.de/en/">CeGaT</a> (T&uuml;bingen) / In-house (Berlin)</td>
           </tr>
 
           <tr>
@@ -558,15 +558,15 @@
             </td>
             <td data-sort="30">100%</td>
             <td data-sort="2400">€1,999 (~$2,400)</td>
-            <td data-sort="5.5">3&ndash;8 weeks</td>
-            <td></td>
-            <td></td>
+            <td data-sort="4.5">3&ndash;6 weeks</td>
+            <td>150bp</td>
             <td></td>
             <td></td>
             <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>✅️</td>
+            <td>CE-IVD / ISO 9001 / ISO 13485</td>
+            <td>Illumina</td>
+            <td>Saliva</td>
             <td>Madrid / Boston / Cambridge, UK</td>
           </tr>
 
@@ -574,39 +574,39 @@
             <td>GenePlanet</td>
             <td data-sort="Premium WGS">
               <a href="https://geneplanet.com">Premium WGS</a>
-              <span class="status-note">Raw data not included by default (~€50 extra). Pricing not transparently listed.</span>
+              <span class="status-note">Raw data not available. Likely low-pass WGS (coverage depth not disclosed). 30-minute expert consultation included. Pricing varies by region.</span>
             </td>
             <td></td>
+            <td data-sort="369">~$369 / ~€299</td>
+            <td data-sort="6">5&ndash;7 weeks</td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Slovenia (Europe primarily)</td>
+            <td><span data-toggle="tooltip" title="30-minute expert consultation included (not formal clinical genetic counseling)">⚠️ </span></td>
+            <td>ISO 17025 / ISO 27001</td>
+            <td>Illumina</td>
+            <td>Saliva</td>
+            <td>Slovenia (5 labs globally)</td>
           </tr>
 
           <tr>
             <td>Veritas Intercontinental</td>
             <td data-sort="myGenome">
               <a href="https://www.veritasint.com">myGenome</a>
-              <span class="status-note">Physician-mediated model (not pure DTC). Available in 30+ countries (Europe, Latin America, UAE). Pricing not publicly listed.</span>
+              <span class="status-note">Physician-mediated model (not pure DTC). Available in 30+ countries. Pre- and post-test counseling included. Requires physician prescription.</span>
             </td>
+            <td data-sort="30">30x</td>
+            <td><span data-toggle="tooltip" title="Historically ~€995; current pricing requires consultation">Contact for pricing</span></td>
+            <td data-sort="13">12&ndash;14 weeks</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><span data-toggle="tooltip" title="$99 extra, 5-7 days to process">⚠️ </span></td>
+            <td><span data-toggle="tooltip" title="$500 extra per SNPedia">⚠️ </span></td>
             <td></td>
             <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>ISO</td>
+            <td>Illumina NovaSeq 6000</td>
+            <td>Saliva</td>
             <td>Barcelona, Spain</td>
           </tr>
 
