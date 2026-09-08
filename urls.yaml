@@ -1,6 +1,7 @@
+# Consumer-only canonical sources; manual browser/API checks remain necessary (README.md).
 kind: url
-name: "Dante: My Full DNA"
-url: "https://us.dantelabs.com/collections/our-tests/products/whole-genome-sequencing"
+name: "Gencove: Consumer \u2014 low-pass WGS + imputation"
+url: "https://gencove.com/"
 filter:
   - css:
       selector: html
@@ -11,8 +12,8 @@ filter:
 ---
 
 kind: url
-name: "Dante: Whole GenomeZ"
-url: "https://us.dantelabs.com/collections/our-tests/products/whole-genomez"
+name: "tellmeGen: Ultra WGS"
+url: "https://shop.tellmegen.com/en-us/products/ultra-wgs-dna-kit"
 filter:
   - css:
       selector: html
@@ -23,8 +24,8 @@ filter:
 ---
 
 kind: url
-name: "Dante: Whole GenomeL"
-url: "https://us.dantelabs.com/collections/our-tests/products/long-reads-whole-genome-sequencing"
+name: "Nucleus: Health + Preview"
+url: "https://mynucleus.com/health"
 filter:
   - css:
       selector: html
@@ -35,8 +36,8 @@ filter:
 ---
 
 kind: url
-name: "Veritas: myGenome Standard, Premium, Diagnostic"
-url: "https://www.veritasgenetics.com/myGenome"
+name: "Dante Labs: Premium WGS \u2014 three report options"
+url: "https://dantelabs.com/genome/"
 filter:
   - css:
       selector: html
@@ -47,8 +48,8 @@ filter:
 ---
 
 kind: url
-name: "Nebula"
-url: "https://portal.nebula.org/get-sequenced"
+name: "DNA Complete: Elite"
+url: "https://dnacomplete.com/shop"
 filter:
   - css:
       selector: html
@@ -59,8 +60,8 @@ filter:
 ---
 
 kind: url
-name: "Full Genomes: 15x, 20x, 30x, Clinical, Long Read"
-url: "https://www.fullgenomes.com/whole-genome-sequencing/"
+name: "YSEQ: WGS"
+url: "https://www.yseq.net/product_info.php?cPath=29&products_id=42468"
 filter:
   - css:
       selector: html
@@ -71,8 +72,8 @@ filter:
 ---
 
 kind: url
-name: "Genomes Personalized Health: Whole Genome Sequencing"
-url: "https://genomicspersonalizedhealth.com/whole-genome-sequencing-analysis/"
+name: "YSEQ: WGS+"
+url: "https://www.yseq.net/product_info.php?cPath=29&products_id=129554"
 filter:
   - css:
       selector: html
@@ -83,8 +84,8 @@ filter:
 ---
 
 kind: url
-name: "Gene by Gene: Whole Genome Sequencing"
-url: "https://www.genebygene.com/pages/research"
+name: "YSEQ: WGS++"
+url: "https://www.yseq.net/product_info.php?cPath=29&products_id=129555"
 filter:
   - css:
       selector: html
@@ -95,11 +96,479 @@ filter:
 ---
 
 kind: url
-name: "YSEQ: Whole Genome Sequence 15x, 30x, 50x"
-url: "https://www.yseq.net/product_info.php?cPath=29&products_id=42468&osCsid=23a78b56dd32f26c5e986cf479814712"
+name: "24Genetics: Whole Exome Sequencing"
+url: "https://24genetics.com/whole-exome-sequencing/"
 filter:
   - css:
       selector: html
-      exclude: script,img,.infoBoxContainer
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "24Genetics: Whole Genome Sequencing"
+url: "https://24genetics.com/sequence-whole-genome/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "GenePlanet: Premium DNA test"
+url: "https://geneplanet.com/eu/products/premium-pack"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "MyHeritage: DNA \u2014 genealogy low-pass WGS"
+url: "https://www.myheritage.com/dna"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "ADNTRO: Whole genome sequencing"
+url: "https://adntro.com/en/wgs-whole-genome-sequencing/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Macromo: DNA Whole Genome Sequencing 30\u00d7"
+url: "https://macromo.com/product/dna-whole-genome-sequencing"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Genome Computer: Whole genome, 30x"
+url: "https://genome.computer/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Mito Health: Whole Genome Sequencing Test Kit, 3\u00d7"
+url: "https://mitohealth.com/products/whole-genome-sequencing-3x"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Mito Health: Whole Genome Sequencing Test Kit, 30\u00d7"
+url: "https://mitohealth.com/products/whole-genome-sequencing-30x"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "The ODIN: Whole Genome Sequencing (30\u00d7) \u2014 human option"
+url: "https://www.the-odin.com/whole-genome-sequencing-30x/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Meridian DNA (India): Whole Genome Sequencing"
+url: "https://www.meridiandna.com/tests/whole-genome"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Veritas Intercontinental: myGenome \u2014 consultation required"
+url: "https://www.veritasint.com/genetic-test/mygenome/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Sequencing.com: 30\u00d7 WGS \u2014 report and speed options"
+url: "https://get.sequencing.com/shop-all-bundles/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "SelfDecode: 30\u00d7 WGS \u2014 kit / Advanced / Ultimate"
+url: "https://selfdecode.com/en/whole-genome-sequencing-wgs/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "CircleDNA: Premium DNA Test"
+url: "https://circledna.com/products/premium-dna-test"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Human Longevity: Whole Genome Sequencing"
+url: "https://www.humanlongevity.com/genomics"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Gencove: help"
+url: "https://gencove.com/help-center/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "tellmeGen: raw downloads"
+url: "https://shop.tellmegen.com/en/blogs/tools-and-advice/how-many-times-can-i-download-my-raw-data-if-i-am-an-ultra-user"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Nucleus: FAQ"
+url: "https://mynucleus.com/faq"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Nucleus: terms"
+url: "https://mynucleus.com/terms-of-service"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "DNA Complete: terms"
+url: "https://dnacomplete.com/terms-of-use/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "DNA Complete: cancellation"
+url: "https://dnacomplete.com/refund-and-cancellation-policy/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "YSEQ: FAQ"
+url: "https://www.yseq.net/faq.php"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Mito: genetic terms"
+url: "https://mitohealth.com/genetic-services-terms"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Meridian: terms"
+url: "https://www.meridiandna.com/terms"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "MyHeritage: WGS data"
+url: "https://www.myheritage.com/help/en/articles/12852457-what-does-the-whole-genome-sequencing-wgs-upgrade-mean-for-my-dna-results"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "SelfDecode: WGS help"
+url: "https://selfdecode.helpscoutdocs.com/article/980-what-is-whole-genome-sequencing"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "CircleDNA: technology"
+url: "https://circledna.com/pages/technology"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "CircleDNA: raw extraction"
+url: "https://circledna.com/products/raw-data-extraction"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Veritas: genome data access"
+url: "https://www.veritasint.com/mygenome-experience/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Sequencing: bundle builder"
+url: "https://get.sequencing.com/build-your-own-bundle/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Dante: receipt clock and partner labs"
+url: "https://dantelabs.com/faq/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "tellmeGen: interpretation consultations"
+url: "https://shop.tellmegen.com/en-us/collections/consultations-and-reports"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "24Genetics: report deadline"
+url: "https://24genetics.com/general-terms-and-conditions/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "24Genetics: sequencing lab routing"
+url: "https://24genetics.com/genetic-data-protection/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Macromo: membership renewal terms"
+url: "https://legal.macromo.com/general-terms-and-conditions"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Genome Computer: WGS terms"
+url: "https://genome.computer/terms"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "Genome Computer: file retention"
+url: "https://genome.computer/privacy"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "ODIN: WGS data retention"
+url: "https://www.the-odin.com/privacy-policy-for-wgs/"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
+  - html2text:
+      method: pyhtml2text
+
+---
+
+kind: url
+name: "SelfDecode: WGS ordering timeline"
+url: "https://selfdecode.helpscoutdocs.com/article/982-ordering-wgs-how-it-works-timelines-and-faqs"
+filter:
+  - css:
+      selector: html
+      exclude: script,img
   - html2text:
       method: pyhtml2text

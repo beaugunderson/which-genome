@@ -1,804 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Which Genome?</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style type="text/css">
-      :root {
-        --accent: #1a6b5a;
-        --accent-light: #e8f5f1;
-        --header-bg: #1b2a4a;
-        --text-primary: #1a1a2e;
-        --text-secondary: #555;
-        --border: #e2e8f0;
-        --row-hover: #f1f5f9;
-        --row-stripe: #f8fafc;
-      }
-
-      html {
-        font-size: 12px;
-      }
-
-      @media (min-width: 768px) {
-        html {
-          font-size: 13px;
-        }
-      }
-
-      body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: var(--text-primary);
-        background: #f5f7fa;
-      }
-
-      .main-header {
-        max-width: 800px;
-        padding-top: 3rem;
-        padding-bottom: 2rem;
-      }
-
-      .main-header h1 {
-        font-weight: 700;
-        font-size: 2.5rem;
-        letter-spacing: -0.02em;
-        color: var(--header-bg);
-      }
-
-      .lead {
-        max-width: 620px;
-        margin-left: auto;
-        margin-right: auto;
-        color: var(--text-secondary);
-        font-size: 1.15rem;
-        line-height: 1.6;
-      }
-
-      .lead em {
-        color: var(--accent);
-        font-style: normal;
-        font-weight: 600;
-      }
-
-      .updated-note {
-        margin-top: 0.75rem;
-        font-size: 0.85rem;
-        color: #888;
-      }
-
-      .table-wrapper {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-        overflow-x: auto;
-        margin: 0 1rem 2rem;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      #services-table {
-        margin-bottom: 0;
-        border-collapse: separate;
-        border-spacing: 0;
-      }
-
-      #services-table thead th {
-        background: var(--header-bg);
-        color: #fff;
-        border: none;
-        font-weight: 600;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        padding: 0.75rem 0.75rem;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        cursor: pointer;
-        user-select: none;
-        transition: background-color 0.15s;
-      }
-
-      #services-table thead th:first-child {
-        border-radius: 8px 0 0 0;
-      }
-
-      #services-table thead th:last-child {
-        border-radius: 0 8px 0 0;
-      }
-
-      #services-table thead th:hover {
-        background: #243a60;
-      }
-
-      #services-table thead th abbr {
-        color: inherit;
-        text-decoration-color: rgba(255, 255, 255, 0.4);
-      }
-
-      #services-table tr th:nth-child(7),
-      #services-table tr th:nth-child(8),
-      #services-table tr th:nth-child(9),
-      #services-table tr th:nth-child(10) {
-        text-align: center !important;
-      }
-
-      #services-table tr td:nth-child(7),
-      #services-table tr td:nth-child(8),
-      #services-table tr td:nth-child(9),
-      #services-table tr td:nth-child(10) {
-        text-align: center !important;
-      }
-
-      #services-table tbody td {
-        padding: 0.65rem 0.75rem;
-        border-top: 1px solid var(--border);
-        vertical-align: top;
-        font-size: 0.92rem;
-      }
-
-      #services-table tbody tr:nth-child(even):not(.defunct) {
-        background: var(--row-stripe);
-      }
-
-      #services-table tbody tr:not(.defunct):hover {
-        background: var(--row-hover);
-      }
-
-      #services-table tbody td:first-child {
-        font-weight: 600;
-        color: var(--text-primary);
-      }
-
-      #services-table tbody td a {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: 500;
-      }
-
-      #services-table tbody td a:hover {
-        text-decoration: underline;
-      }
-
-      tr.defunct td {
-        color: #aaa;
-        font-size: 0.85rem;
-      }
-
-      tr.defunct td:first-child {
-        text-decoration: line-through;
-      }
-
-      .status-note {
-        font-style: italic;
-        font-size: 0.82em;
-        display: block;
-        margin-top: 0.25em;
-        color: #7c6f27;
-        line-height: 1.4;
-      }
-
-      .caution-note {
-        font-style: italic;
-        font-size: 0.82em;
-        display: block;
-        margin-top: 0.25em;
-        color: #c0392b;
-        line-height: 1.4;
-      }
-
-      .sort-arrow {
-        font-size: 0.7em;
-        margin-left: 0.3em;
-        opacity: 0.85;
-      }
-
-      .sort-hint {
-        font-size: 0.6em;
-        margin-left: 0.3em;
-        opacity: 0.35;
-        vertical-align: middle;
-      }
-
-      .help-wanted {
-        margin-bottom: 2em;
-      }
-
-      .help-wanted h4 {
-        font-weight: 600;
-        color: var(--header-bg);
-      }
-
-      .help-wanted ul {
-        color: var(--text-secondary);
-        line-height: 1.7;
-      }
-
-      .footer {
-        background: var(--header-bg);
-        color: rgba(255, 255, 255, 0.7);
-        padding: 1.25rem 1.5rem;
-        font-size: 0.9rem;
-      }
-
-      .footer a {
-        color: #fff;
-        font-weight: 500;
-      }
-
-      .footer a:hover {
-        color: var(--accent-light);
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="main-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Who should sequence your genome?</h1>
-
-      <p class="lead">
-        There are many full genome/exome sequencing providers today but not a
-        great way to compare them. <em>Which Genome</em> is an open attempt to
-        change that.
-      </p>
-
-      <p class="updated-note">Last updated April 2026. Click any column header to sort.</p>
-    </div>
-
-    <div class="table-wrapper">
-      <table class="table" id="services-table">
-        <thead>
-          <tr>
-            <th scope="col">Company</th>
-            <th scope="col">Product</th>
-            <th scope="col">Coverage</th>
-            <th scope="col">Price</th>
-            <th scope="col">Turn&shy;around</th>
-            <th scope="col">Read<br>Length</th>
-            <th scope="col" class="text-center"><abbr title="variant call format">VCF</abbr></th>
-            <th scope="col" class="text-center"><abbr title="binary sequence alignment map format">BAM</abbr></th>
-            <th scope="col" class="text-center">FASTQ</th>
-            <th scope="col">Genetic<br>Counseling</th>
-            <th scope="col"><abbr title="College of American Pathologists accredited">CAP</abbr>/<wbr><abbr title="Clinical Laboratory Improvement Amendments certified">CLIA</abbr></th>
-            <th scope="col">Hardware</th>
-            <th scope="col">Sample</th>
-            <th scope="col">Lab</th>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Which Genome?</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="sort.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Who should sequence your genome?</h1>
+    <p>Compare whole-genome and exome tests you can buy yourself.</p>
+    <p class="meta">Checked <time datetime="2026-09-08">8 September 2026</time> · <a href="https://github.com/beaugunderson/which-genome/issues">Suggest a correction</a> · Expand a test for costs, requirements and sources.</p>
+  </header>
+  <main>
+    <p id="sort-status" class="sr-only" role="status" aria-live="polite"></p>
+    <div class="table-wrapper" tabindex="0" role="region" aria-label="Sequencing comparison; scroll horizontally on small screens">
+      <table id="services-table">
+        <caption>26 tests · 20 providers<span class="scroll-note">Scroll for all columns</span></caption>
+        <colgroup><col class="test"><col class="depth"><col class="price"><col class="results"><col class="files"></colgroup>
+        <thead><tr>
+          <th scope="col" data-type="text" aria-sort="none"><button type="button">Test<span class="sort-hint" aria-hidden="true"></span></button></th>
+          <th scope="col" data-type="number" aria-sort="none"><button type="button">Depth<span class="sort-hint" aria-hidden="true"></span></button></th>
+          <th scope="col" data-type="price" aria-sort="none"><button type="button">Price<span class="sort-hint" aria-hidden="true"></span></button></th>
+          <th scope="col" data-type="number" aria-sort="none"><button type="button">Results<span class="sort-hint" aria-hidden="true"></span></button></th>
+          <th scope="col" data-type="text" aria-sort="none"><button type="button">Raw files<span class="sort-hint" aria-hidden="true"></span></button></th>
+        </tr></thead>
+        <tbody data-section="consumer" data-sortable="true">
+          <tr id="24genetics-wes" class="product-row" data-provider="24Genetics">
+            <td data-sort="24Genetics"><button type="button" class="disclosure" aria-expanded="false" aria-controls="24genetics-wes-details" aria-label="Details for 24Genetics Exome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">24Genetics</span><span class="product">Exome</span></span></td>
+            <td data-sort="70">70×, exome only</td>
+            <td data-sort="999" data-currency="USD">USD 999</td>
+            <td data-sort="">≤9 weeks²</td>
+            <td data-sort="">—<span class="secondary">Download included</span></td>
           </tr>
-        </thead>
-
-        <tbody>
-          <!-- Active providers, sorted by lowest-priced product -->
-
-          <tr>
-            <td>Gencove</td>
-            <td data-sort="Low-pass WGS with Imputation">
-              <a href="https://gencove.com">Low-pass WGS with Imputation</a>
-              <span class="status-note">Educational/informational only, not diagnostic. US only. Early access pricing.</span>
-            </td>
-            <td data-sort="0.7">~0.4&ndash;1x</td>
-            <td data-sort="49">$49</td>
-            <td data-sort="3.5">3&ndash;4 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td>Illumina / BGI DNBseq</td>
-            <td>Cheek swab</td>
-            <td>New York, NY</td>
+          <tr id="24genetics-wes-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for 24Genetics Exome</summary><div class="detail-content">
+            <h2>24Genetics Exome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">International consumer store; destination eligibility determined at checkout. Raw data download included; format unspecified.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 999 (observed English store)<span class="status-note">No membership shown; taxes/shipping and localized prices may vary.</span></dd>
+              <dt>Results</dt><dd data-field="results">Maximum 9 weeks to reports after saliva tube reaches 24Genetics offices; communicated technical problems excepted. Raw-file clock unspecified.</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">File formats unverified.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">70×, exome only</dd>
+              <dt>Sample</dt><dd data-field="sample">Saliva collector</dd>
+              <dt>Technology</dt><dd data-field="technology">Illumina NGS; Roche capture (not sequencer)</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">One telephone genetic counseling consultation included</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Lugo, Spain: c/ María Barbeito 61, As Gándaras; associated lab, legal operator unnamed</dd>
+            </dl></div>
+            <div class="sources"><a href="https://24genetics.com/whole-exome-sequencing/">Visit provider</a><a href="https://24genetics.com/finalise-purchase/?add-to-cart=361788">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#24genetics-wes">Dated audit</a><details><summary>More sources</summary><a href="https://24genetics.com/general-terms-and-conditions/">Report deadline</a><a href="https://24genetics.com/genetic-data-protection/">Sequencing lab locations</a></details></div>
+          </div></details></td></tr>
+          <tr id="24genetics-wgs" class="product-row" data-provider="24Genetics">
+            <td data-sort="24Genetics"><button type="button" class="disclosure" aria-expanded="false" aria-controls="24genetics-wgs-details" aria-label="Details for 24Genetics Whole genome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">24Genetics</span><span class="product">Whole genome</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="1999" data-currency="USD">USD 1,999</td>
+            <td data-sort="">≤9 weeks²</td>
+            <td data-sort="FASTQ">FASTQ</td>
           </tr>
-
-          <tr>
-            <td>TellmeGen</td>
-            <td data-sort="Ultra WGS">
-              <a href="https://www.tellmegen.com">Ultra WGS</a>
-              <span class="status-note">Includes 1 year tellmeGen+ subscription (€19.99/yr renewal). 15+ languages. Free round-trip shipping within country of purchase.</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td data-sort="299">€299 (~$299&ndash;349)</td>
-            <td data-sort="5">4&ndash;6 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td></td>
-            <td>✅️</td>
-            <td><span data-toggle="tooltip" title="Add-on from ~$29, not included with test">⚠️ </span></td>
-            <td>ISO 17025/13485/15189</td>
-            <td>Illumina (via Eurofins Genomics)</td>
-            <td>Saliva swab</td>
-            <td>Denmark (Eurofins Genomics)</td>
+          <tr id="24genetics-wgs-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for 24Genetics Whole genome</summary><div class="detail-content">
+            <h2>24Genetics Whole genome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">International consumer store; destination eligibility determined at checkout.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 1,999 (observed English store)<span class="status-note">No membership shown; taxes/shipping and localized prices may vary.</span></dd>
+              <dt>Results</dt><dd data-field="results">Maximum 9 weeks to reports after saliva tube reaches 24Genetics offices; communicated technical problems excepted. Raw-file clock unspecified.</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Reads: Included (~100 GB, two compressed files)</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Saliva collector</dd>
+              <dt>Technology</dt><dd data-field="technology">Illumina; model unknown</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Two 15-minute genetic counseling consultations included</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Granada, Spain: Plaza Ciudad de los Cármenes 3-Bajo; associated lab, legal operator unnamed</dd>
+            </dl></div>
+            <div class="sources"><a href="https://24genetics.com/sequence-whole-genome/">Visit provider</a><a href="https://24genetics.com/finalise-purchase/?add-to-cart=361789">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#24genetics-wgs">Dated audit</a><details><summary>More sources</summary><a href="https://24genetics.com/general-terms-and-conditions/">Report deadline</a><a href="https://24genetics.com/genetic-data-protection/">Sequencing lab locations</a></details></div>
+          </div></details></td></tr>
+          <tr id="adntro" class="product-row" data-provider="ADNTRO">
+            <td data-sort="ADNTRO"><button type="button" class="disclosure" aria-expanded="false" aria-controls="adntro-details" aria-label="Details for ADNTRO Whole genome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">ADNTRO</span><span class="product">Whole genome</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="950" data-currency="EUR">EUR 950</td>
+            <td data-sort="35">5–8 weeks</td>
+            <td data-sort="">—</td>
           </tr>
-
-          <tr>
-            <td>Dante Labs</td>
-            <td data-sort="Dante Genome Test">
-              <a href="https://www.dantelabs.com">Dante Genome Test</a>
-              <span class="status-note">Stated turnaround 6&ndash;8 weeks; widespread reports of 6+ month delays.</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td data-sort="399">$399</td>
-            <td data-sort="7">6&ndash;8 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td>CAP/CLIA/ISO 15189</td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td>L'Aquila, Italy</td>
+          <tr id="adntro-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for ADNTRO Whole genome</summary><div class="detail-content">
+            <h2>ADNTRO Whole genome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Online card purchase; blood collection arrangements vary by country. No outside referral stated. Download formats/fees unpublished.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">EUR 950 incl. VAT<span class="status-note">Reports need no subscription; updates/GeneAI: 3 months free, then EUR 25/year</span></dd>
+              <dt>Results</dt><dd data-field="results">5–8 weeks from sample receipt</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">File formats unverified.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Blood</dd>
+            </dl></div>
+            <div class="sources"><a href="https://adntro.com/en/wgs-whole-genome-sequencing/">Visit provider</a><a href="https://buy.stripe.com/6oEaGy9dfaIE1qwfZ5">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#adntro">Dated audit</a></div>
+          </div></details></td></tr>
+          <tr id="circle-premium" class="product-row" data-provider="CircleDNA">
+            <td data-sort="CircleDNA"><button type="button" class="disclosure" aria-expanded="false" aria-controls="circle-premium-details" aria-label="Details for CircleDNA Premium" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">CircleDNA</span><span class="product">Premium</span></span></td>
+            <td data-sort="">—, exome only</td>
+            <td data-sort="349" data-currency="USD">USD 349</td>
+            <td data-sort="">18 business days</td>
+            <td data-sort="">—<span class="secondary">USD 51 extraction</span></td>
           </tr>
-
-          <tr>
-            <td>Sequencing.com</td>
-            <td data-sort="Whole Genome Sequencing">
-              <a href="https://sequencing.com">Whole Genome Sequencing</a>
-              <span class="status-note">Base bundle includes 10 reports. Additional reports via app marketplace ($19&ndash;$129/mo subscriptions). Accepts uploads from 23andMe, AncestryDNA, etc.</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td data-sort="399">$399</td>
-            <td data-sort="8">Under 8 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td>CAP/CLIA</td>
-            <td>Illumina</td>
-            <td>Cheek swab</td>
-            <td>Pasadena, CA (HQ)</td>
+          <tr id="circle-premium-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for CircleDNA Premium</summary><div class="detail-content">
+            <h2>CircleDNA Premium</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">80+ shipping countries advertised; return from the delivery country.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 349 promotional (was USD 629)<span class="status-note">FOREVERYOUNG26 automatic discount observed. Raw-data extraction USD 51 in store; formats unspecified. No required subscription shown.</span></dd>
+              <dt>Results</dt><dd data-field="results">18 business days; start unspecified</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">File formats unverified.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">Exome only, per older provider technical description<span class="status-note">Current capture details/depth not published.</span></dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Technology</dt><dd data-field="technology">Illumina NovaSeq 6000</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">30-minute genetic consultation included</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">CircleDNA, Hong Kong (provider named)<br>ISO-accredited lab claimed; standard unspecified</dd>
+            </dl></div>
+            <div class="sources"><a href="https://circledna.com/products/premium-dna-test">Visit provider</a><a href="https://magazine.circledna.com/en/articles/circlednas-whole-exome-sequencing-technology-explained">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#circle-premium">Dated audit</a><details><summary>More sources</summary><a href="https://circledna.gorgias.help/en-US/accuracy-of-the-circle-reports-1214118">Source 3</a><a href="https://circledna.com/products/raw-data-extraction">Source 4</a><a href="https://circledna.com/pages/technology">Source 5</a><a href="https://circledna.gorgias.help/en-US/do-you-deliver-to-my-country-1222017">Source 6</a><a href="https://circledna.gorgias.help/en-US/where-is-my-dna-processed-1214119">Source 7</a></details></div>
+          </div></details></td></tr>
+          <tr id="dante-premium" class="product-row" data-provider="Dante Labs">
+            <td data-sort="Dante Labs"><button type="button" class="disclosure" aria-expanded="false" aria-controls="dante-premium-details" aria-label="Details for Dante Labs Premium / report options" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Dante Labs</span><span class="product">Premium / report options</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="449" data-currency="USD">From USD 449<span class="secondary">EUR 399 / GBP 345</span></td>
+            <td data-sort="42">6–8 weeks</td>
+            <td data-sort="VCF · BAM · FASTQ">VCF · BAM · FASTQ</td>
           </tr>
-
-          <tr>
-            <td>Nucleus Genomics</td>
-            <td data-sort="30x Whole Genome Sequencing">
-              <a href="https://mynucleus.com">30x Whole Genome Sequencing</a>
-              <span class="status-note">800+ risk scores. Integrates non-genetic factors for absolute risk. AI health assistant. $14M Series A (Founders Fund).</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td data-sort="538">$499 + $39/yr</td>
-            <td data-sort="5">4&ndash;6 weeks</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td><span data-toggle="tooltip" title="CRAM format (compressed BAM equivalent)">✅️</span></td>
-            <td>✅️</td>
-            <td><span data-toggle="tooltip" title="Optional via SteadyMD, $99">⚠️ </span></td>
-            <td>CLIA</td>
-            <td>Illumina NovaSeq X Plus</td>
-            <td>Cheek swab</td>
-            <td>US-based</td>
+          <tr id="dante-premium-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Dante Labs Premium / report options</summary><div class="detail-content">
+            <h2>Dante Labs Premium / report options</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">No prescription/referral. Ships to 45 checkout countries, including US, UK, Canada, Australia and most EU countries; full list in audit.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 449 / EUR 399 / GBP 345<span class="status-note">One-time; core reports, not a subscription.</span><details><summary>All report options</summary><ul><li>Premium + All Reports: USD 599 / EUR 549 / GBP 469; 200+ reports and 1 year new reports.</li><li>All Reports + 3 Year Updates: USD 849 / EUR 749 / GBP 649; includes AI Genome Chat and PRS.</li></ul></details></dd>
+              <dt>Results</dt><dd data-field="results">6–8 weeks after sample arrives at lab</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Included<br>Alignment: BAM: included<br>Reads: Included</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Saliva</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Unnamed US/EU partner labs; genomic-data processing at Italy partner (provider claim)<br>CLIA/CAP/ISO 15189 partner-lab claims; operating entities/sites not matched</dd>
+            </dl></div>
+            <div class="sources"><a href="https://dantelabs.com/genome/">Visit provider</a><a href="https://dantelabs.com/checkout/?product=genome&amp;tier=premium">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#dante-premium">Dated audit</a><details><summary>More sources</summary><a href="https://dantelabs.com/products/whole-genome-sequencing">Source 2</a><a href="https://dantelabs.com/api/prices">Source 3</a><a href="https://dantelabs.com/checkout/?product=genome&amp;tier=all-reports">Purchase / order</a><a href="https://dantelabs.com/checkout/?product=genome&amp;tier=3yr-updates">Purchase / order</a><a href="https://dantelabs.com/faq/">Source 7</a></details></div>
+          </div></details></td></tr>
+          <tr id="dna-complete-essential" class="product-row" data-provider="DNA Complete">
+            <td data-sort="DNA Complete"><button type="button" class="disclosure" aria-expanded="false" aria-controls="dna-complete-essential-details" aria-label="Details for DNA Complete Essential" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">DNA Complete</span><span class="product">Essential</span></span></td>
+            <td data-sort="1">1×</td>
+            <td data-sort="245" data-currency="USD">USD 245<span class="secondary">then USD 95/year</span></td>
+            <td data-sort="">—</td>
+            <td data-sort="VCF · CRAM">VCF · CRAM</td>
           </tr>
-
-          <tr>
-            <td>YSEQ</td>
-            <td data-sort="WGS (45 Gbases, ~15x)">
-              <a href="https://www.yseq.net">WGS (45 Gbases, ~15x)</a>
-            </td>
-            <td data-sort="15">~15x</td>
-            <td data-sort="399">€359 (~$399)</td>
-            <td data-sort="26"><span data-toggle="tooltip" title="FAQ states 5-7 months currently">5&ndash;7 months</span></td>
-            <td>100&ndash;150bp</td>
-            <td><span data-toggle="tooltip" title="Y-chromosome SNP VCF annotation">⚠️ </span></td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a> (T&uuml;bingen) / In-house (Berlin)</td>
+          <tr id="dna-complete-essential-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for DNA Complete Essential</summary><div class="detail-content">
+            <h2>DNA Complete Essential</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">DNA Complete by Nebula Genomics. US shipping free; non-US USD 25 where eligible. Sample due within 6 months. Cancellation can lead to report/data deletion after paid access ends.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 245 limited-time<span class="status-note">First year membership included; USD 95/year thereafter, from purchase anniversary</span></dd>
+              <dt>Results</dt><dd data-field="results">Unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Advertised; family-level promise<br>Alignment: CRAM: advertised (family-level)</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">1× (low-pass)</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Paid online one-to-one certified genetic counselor (provider claim); fee/duration unpublished</dd>
+            </dl></div>
+            <div class="sources"><a href="https://dnacomplete.com/shop">Visit provider</a><a href="https://dnacomplete.com/dnacomplete/checkout">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#dna-complete-essential">Dated audit</a><details><summary>More sources</summary><a href="https://dnacomplete.com/">Source 2</a><a href="https://dnacomplete.com/terms-of-use/">Source 3</a><a href="https://dnacomplete.com/refund-and-cancellation-policy/">Source 4</a><a href="https://www.sec.gov/Archives/edgar/data/868278/000086827826000005/prph-20251231.htm">Source 5</a><a href="https://dnacomplete.com/api/tier-pricing">Source 6</a></details></div>
+          </div></details></td></tr>
+          <tr id="dna-complete-pro" class="product-row" data-provider="DNA Complete">
+            <td data-sort="DNA Complete"><button type="button" class="disclosure" aria-expanded="false" aria-controls="dna-complete-pro-details" aria-label="Details for DNA Complete Pro" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">DNA Complete</span><span class="product">Pro</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="595" data-currency="USD">USD 595<span class="secondary">then USD 195/year</span></td>
+            <td data-sort="">—</td>
+            <td data-sort="VCF · CRAM">VCF · CRAM</td>
           </tr>
-
-          <tr class="defunct">
-            <td>YSEQ WGS400</td>
-            <td>
-              Discontinued. Product page no longer available.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr id="dna-complete-pro-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for DNA Complete Pro</summary><div class="detail-content">
+            <h2>DNA Complete Pro</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US shipping free; non-US USD 25 where eligible. Sample due within 6 months. Cancellation can lead to report/data deletion after paid access ends.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 595 limited-time<span class="status-note">First year membership included; USD 195/year thereafter, from purchase anniversary</span></dd>
+              <dt>Results</dt><dd data-field="results">Unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Advertised; family-level promise<br>Alignment: CRAM: advertised (family-level)</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Paid online one-to-one certified genetic counselor (provider claim); fee/duration unpublished</dd>
+            </dl></div>
+            <div class="sources"><a href="https://dnacomplete.com/shop">Visit provider</a><a href="https://dnacomplete.com/dnacomplete/checkout">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#dna-complete-pro">Dated audit</a><details><summary>More sources</summary><a href="https://dnacomplete.com/">Source 2</a><a href="https://dnacomplete.com/terms-of-use/">Source 3</a><a href="https://dnacomplete.com/refund-and-cancellation-policy/">Source 4</a><a href="https://www.sec.gov/Archives/edgar/data/868278/000086827826000005/prph-20251231.htm">Source 5</a><a href="https://dnacomplete.com/api/tier-pricing">Source 6</a></details></div>
+          </div></details></td></tr>
+          <tr id="dna-complete-elite" class="product-row" data-provider="DNA Complete">
+            <td data-sort="DNA Complete"><button type="button" class="disclosure" aria-expanded="false" aria-controls="dna-complete-elite-details" aria-label="Details for DNA Complete Elite" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">DNA Complete</span><span class="product">Elite</span></span></td>
+            <td data-sort="100">100×</td>
+            <td data-sort="1295" data-currency="USD">USD 1,295<span class="secondary">then USD 495/year</span></td>
+            <td data-sort="">—</td>
+            <td data-sort="VCF · CRAM">VCF · CRAM</td>
           </tr>
-
-          <tr>
-            <td>DNA Complete</td>
-            <td data-sort="Essential (1x WGS)">
-              <a href="https://dnacomplete.com">Essential (1x WGS)</a>
-              <span class="caution-note">Caution: ProPhase Labs (parent) filed Chapter 11 for lab subsidiaries. In-house lab shut down; now outsources sequencing. Widespread reports of 6&ndash;12+ month delays, with many customers never receiving results. 1.3/5 on Trustpilot (89 reviews). Ships to 130+ countries (international return shipping at customer expense).</span>
-            </td>
-            <td data-sort="1">1x</td>
-            <td data-sort="245">$245</td>
-            <td data-sort="12">~12 weeks (advertised; actual often 6&ndash;12+ months)</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td><span data-toggle="tooltip" title="Optional add-on via Grey Genetics, LLC. Elite tier includes discounted access.">⚠️ </span></td>
-            <td>CLIA</td>
-            <td>MGI DNBSEQ-T7</td>
-            <td>Cheek swab</td>
-            <td>Garden City, NY (now outsourced)</td>
+          <tr id="dna-complete-elite-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for DNA Complete Elite</summary><div class="detail-content">
+            <h2>DNA Complete Elite</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US shipping free; non-US USD 25 where eligible. Sample due within 6 months. Cancellation can lead to report/data deletion after paid access ends.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 1,295 limited-time<span class="status-note">First year membership included; USD 495/year thereafter, from purchase anniversary</span></dd>
+              <dt>Results</dt><dd data-field="results">Unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Advertised; family-level promise<br>Alignment: CRAM: advertised (family-level)</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">100×</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Paid online one-to-one certified genetic counselor (provider claim); fee/duration unpublished; Elite discount, not an included session</dd>
+            </dl></div>
+            <div class="sources"><a href="https://dnacomplete.com/shop">Visit provider</a><a href="https://dnacomplete.com/dnacomplete/checkout">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#dna-complete-elite">Dated audit</a><details><summary>More sources</summary><a href="https://dnacomplete.com/">Source 2</a><a href="https://dnacomplete.com/terms-of-use/">Source 3</a><a href="https://dnacomplete.com/refund-and-cancellation-policy/">Source 4</a><a href="https://www.sec.gov/Archives/edgar/data/868278/000086827826000005/prph-20251231.htm">Source 5</a><a href="https://dnacomplete.com/api/tier-pricing">Source 6</a></details></div>
+          </div></details></td></tr>
+          <tr id="gencove" class="product-row" data-provider="Gencove">
+            <td data-sort="Gencove"><button type="button" class="disclosure" aria-expanded="false" aria-controls="gencove-details" aria-label="Details for Gencove Consumer" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Gencove</span><span class="product">Consumer · US only</span></span></td>
+            <td data-sort="0.5">~0.5×</td>
+            <td data-sort="69" data-currency="USD">USD 69<span class="secondary">+ shipping</span></td>
+            <td data-sort="21">3–4 weeks</td>
+            <td data-sort="VCF · CRAM or FASTQ">VCF · CRAM or FASTQ</td>
           </tr>
-
-          <tr>
-            <td>DNA Complete</td>
-            <td data-sort="Pro (30x WGS)">
-              <a href="https://dnacomplete.com">Pro (30x WGS)</a>
-              <span class="caution-note">Caution: H600 Project reports results may only achieve 80&ndash;90% genome coverage rather than true 30x WGS.</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td data-sort="595">$595</td>
-            <td data-sort="12">~12 weeks (advertised; actual often 6&ndash;12+ months)</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td><span data-toggle="tooltip" title="Optional add-on via Grey Genetics, LLC. Elite tier includes discounted access.">⚠️ </span></td>
-            <td>CLIA</td>
-            <td>MGI DNBSEQ-T7</td>
-            <td>Cheek swab</td>
-            <td>Garden City, NY (now outsourced)</td>
+          <tr id="gencove-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Gencove Consumer</summary><div class="detail-content">
+            <h2>Gencove Consumer</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US only; educational, not diagnostic. Ordinary account required before purchase.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 69 + shipping<span class="status-note">No recurring fee disclosed; lifetime raw downloads advertised</span></dd>
+              <dt>Results</dt><dd data-field="results">3–4 weeks after lab receipt; 4–6 with low-quality sample</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Included: imputed VCF (GRCh38)<span class="status-note">Archived files require dashboard restore before download; restore time/fee unpublished.</span><br>CRAM OR FASTQ, never both; platform-dependent, not customer choice.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~0.5× (low-pass, imputed)</dd>
+              <dt>Sample</dt><dd data-field="sample">Two cheek swabs</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Not included</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Unnamed laboratory partner<br>CLIA partner claim; CAP unknown</dd>
+            </dl></div>
+            <div class="sources"><a href="https://gencove.com/">Visit provider</a><a href="https://consumer.gencove.com/user/register/">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#gencove">Dated audit</a><details><summary>More sources</summary><a href="https://gencove.com/help-center/">Source 2</a><a href="https://enterprise.gencove.com/blog/introducing-gencove-consumer">Source 3</a><a href="https://consumer.gencove.com/terms-and-conditions/">Source 5</a><a href="https://consumer.gencove.com/developer/">Archive/download documentation</a></details></div>
+          </div></details></td></tr>
+          <tr id="geneplanet-premium" class="product-row" data-provider="GenePlanet">
+            <td data-sort="GenePlanet"><button type="button" class="disclosure" aria-expanded="false" aria-controls="geneplanet-premium-details" aria-label="Details for GenePlanet Premium" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">GenePlanet</span><span class="product">Premium</span></span></td>
+            <td data-sort="">—</td>
+            <td data-sort="449" data-currency="EUR">EUR 449</td>
+            <td data-sort="35">~5 weeks</td>
+            <td data-sort="">—</td>
           </tr>
-
-          <tr>
-            <td>DNA Complete</td>
-            <td data-sort="Elite (100x WGS)">
-              <a href="https://dnacomplete.com">Elite (100x WGS)</a>
-              <span class="caution-note">Includes genetic counseling (discounted). Same delivery concerns as other tiers.</span>
-            </td>
-            <td data-sort="100">100x</td>
-            <td data-sort="1195">$1,195</td>
-            <td data-sort="12">~12 weeks (advertised; actual often 6&ndash;12+ months)</td>
-            <td>150bp</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td><span data-toggle="tooltip" title="Discounted access to Grey Genetics, LLC counseling included with Elite.">✅️</span></td>
-            <td>CLIA</td>
-            <td>MGI DNBSEQ-T7</td>
-            <td>Cheek swab</td>
-            <td>Garden City, NY (now outsourced)</td>
+          <tr id="geneplanet-premium-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for GenePlanet Premium</summary><div class="detail-content">
+            <h2>GenePlanet Premium</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">EU storefront checked; the broad country selector does not establish sample eligibility everywhere.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">EUR 449<span class="status-note">One-time; lifetime new reports/features. Free kit shipping and sample return advertised.</span></dd>
+              <dt>Results</dt><dd data-field="results">About 5 weeks after sample receipt</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Not advertised for consumer download; not an established prohibition for this Premium offer.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">Whole genome; depth unpublished. Current Premium low-pass applicability is unestablished; no numeric depth assigned.</dd>
+              <dt>Sample</dt><dd data-field="sample">Saliva tube</dd>
+            </dl></div>
+            <div class="sources"><a href="https://geneplanet.com/eu/products/premium-pack">Visit provider</a><a href="https://geneplanet.com/eu/checkout/shipping">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#geneplanet-premium">Dated audit</a><details><summary>More sources</summary><a href="https://geneplanet.com/ch">Source 2</a><a href="https://hub.geneplanet.com/en/help/which-method-do-you-use-to-analyse-my-dna/">Source 3</a><a href="https://geneplanet.com/eu/cart">Source 4</a><a href="https://hub.geneplanet.com/en/what-are-home-dna-tests-and-how-do-they-work/">Source 6</a><a href="https://geneplanet.com/terms-and-conditions">Source 7</a></details></div>
+          </div></details></td></tr>
+          <tr id="genome-computer" class="product-row" data-provider="Genome Computer">
+            <td data-sort="Genome Computer"><button type="button" class="disclosure" aria-expanded="false" aria-controls="genome-computer-details" aria-label="Details for Genome Computer Whole genome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Genome Computer</span><span class="product">Whole genome</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="598" data-currency="USD">USD 598<span class="secondary">year 1; then USD 99/year</span></td>
+            <td data-sort="">Varies</td>
+            <td data-sort="gVCF · FASTQ on request">gVCF · FASTQ on request</td>
           </tr>
-
-          <tr>
-            <td>YSEQ</td>
-            <td data-sort="WGS+ (90 Gbases, ~30x)">
-              <a href="https://www.yseq.net">WGS+ (90 Gbases, ~30x)</a>
-            </td>
-            <td data-sort="30">~30x</td>
-            <td data-sort="440">€399 (~$440)</td>
-            <td data-sort="26"><span data-toggle="tooltip" title="FAQ states 5-7 months currently">5&ndash;7 months</span></td>
-            <td>100&ndash;150bp</td>
-            <td><span data-toggle="tooltip" title="Y-chromosome SNP VCF annotation">⚠️ </span></td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a> (T&uuml;bingen) / In-house (Berlin)</td>
+          <tr id="genome-computer-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Genome Computer Whole genome</summary><div class="detail-content">
+            <h2>Genome Computer Whole genome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US, Canada, UK, Australia, New Zealand, Singapore. Contact/shipping form before payment. Also supplies Mito Health; sellers are not independent laboratories.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 598 for the first year: USD 499 upfront + USD 99/year<span class="status-note">Annual fee first billed at genome delivery; cancel anytime. US shipping free, other five supported countries USD 40.</span></dd>
+              <dt>Results</dt><dd data-field="results">Conflicting estimates: marketing 2–3 weeks after lab receipt; terms 4–6 weeks after lab receives and accepts valid sample</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: gVCF available on request; .genome bundle included<span class="status-note">Privacy policy: default 90-day genomic-file retention/redelivery window after delivery; lab deletes samples/deliverables after 90 days. Download promptly; applicability to ongoing paid hosting unclear.</span><br>Reads: Available on request; fee unknown</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">No clinical interpretation provided; AI chat is not genetic counseling. Separate counselor service/fee unknown.</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Unnamed US laboratory partners<br>US partners CAP/CLIA claimed</dd>
+            </dl></div>
+            <div class="sources"><a href="https://genome.computer/order/wgs-30x">Visit provider</a><a href="https://genome.computer/">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#genome-computer">Dated audit</a><details><summary>More sources</summary><a href="https://genome.computer/terms">Source 3</a><a href="https://genome.computer/privacy">File retention</a><a href="https://genome.computer/explorer">Advertised timing</a></details></div>
+          </div></details></td></tr>
+          <tr id="human-longevity" class="product-row" data-provider="Human Longevity">
+            <td data-sort="Human Longevity"><button type="button" class="disclosure" aria-expanded="false" aria-controls="human-longevity-details" aria-label="Details for Human Longevity Whole genome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Human Longevity</span><span class="product">Whole genome · PCP required</span></span></td>
+            <td data-sort="30">~30×</td>
+            <td data-sort="599" data-currency="USD">USD 599<span class="secondary">+ external primary care</span></td>
+            <td data-sort="42">6–8 weeks</td>
+            <td data-sort="">—</td>
           </tr>
-
-          <tr>
-            <td>24Genetics</td>
-            <td data-sort="Whole Exome Sequencing">
-              <a href="https://24genetics.com">Whole Exome Sequencing</a>
-            </td>
-            <td>~85% exome</td>
-            <td data-sort="1200">€999 (~$1,200)</td>
-            <td data-sort="4.5">3&ndash;6 weeks</td>
-            <td>150bp</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>CE-IVD / ISO 9001 / ISO 13485</td>
-            <td>Illumina</td>
-            <td>Saliva</td>
-            <td>Madrid / Boston / Cambridge, UK</td>
+          <tr id="human-longevity-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Human Longevity Whole genome</summary><div class="detail-content">
+            <h2>Human Longevity Whole genome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Requires an existing PCP or establishing primary care at start; PCP contact details required. No outside prescription required in reviewed terms. Provider eligibility review; refund if ineligible. Informational service, not clinical diagnosis under its contract.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 599 one-time<span class="status-note">Required primary care is not included; any external cost is unknown. One year AI app included; later app terms unpublished. No sequencing subscription advertised.</span></dd>
+              <dt>Results</dt><dd data-field="results">6–8 weeks; start unspecified</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">File formats unverified.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~30× average</dd>
+              <dt>Sample</dt><dd data-field="sample">At-home saliva</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Human Longevity; physical site unknown<br>Human Longevity CLIA WGS claim; certificate not checked</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.humanlongevity.com/genomics">Visit provider</a><a href="https://www.humanlongevity.com/dna">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#human-longevity">Dated audit</a></div>
+          </div></details></td></tr>
+          <tr id="macromo" class="product-row" data-provider="Macromo">
+            <td data-sort="Macromo"><button type="button" class="disclosure" aria-expanded="false" aria-controls="macromo-details" aria-label="Details for Macromo Whole genome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Macromo</span><span class="product">Whole genome</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="29000" data-currency="CZK">CZK 29,000<span class="secondary">year 2 price —</span></td>
+            <td data-sort="">—</td>
+            <td data-sort="">—</td>
           </tr>
-
-          <tr>
-            <td>Gene by Gene</td>
-            <td data-sort="Whole Genome Sequencing">
-              <a href="https://www.genebygene.com/pages/research">Whole Genome Sequencing</a>
-              <span class="status-note">Primarily B2B; no public consumer pricing. Major partnership with MyHeritage (1M+ tests/yr on Ultima Genomics).</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td>Inquire for pricing</td>
-            <td data-sort="2.5">10&ndash;15 business days</td>
-            <td>150bp</td>
-            <td><span data-toggle="tooltip" title="Raw FASTQ only; no variant calling included">&#10060;</span></td>
-            <td><span data-toggle="tooltip" title="Raw FASTQ only; no alignment included">&#10060;</span></td>
-            <td>✅️</td>
-            <td></td>
-            <td>CAP/CLIA</td>
-            <td>Ultima UG100 + Illumina</td>
-            <td>Buccal swab</td>
-            <td>Houston, TX</td>
+          <tr id="macromo-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Macromo Whole genome</summary><div class="detail-content">
+            <h2>Macromo Whole genome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Czech-market checkout; 27 European shipping countries listed in audit.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">CZK 29,000 (Czech market)<span class="status-note">Includes 1 year app subscription; subsequent renewal price not established. Linked general terms: paid memberships auto-renew unless cancelled in app before term-end; WGS membership model/fee needs confirmation. Post-term app functions disabled; data access may be limited. Shipping calculated after address.</span></dd>
+              <dt>Results</dt><dd data-field="results">Unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">File formats unverified.</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Saliva ampule; app registration; prepaid return</dd>
+            </dl></div>
+            <div class="sources"><a href="https://macromo.com/product/dna-whole-genome-sequencing">Visit provider</a><a href="https://macromo.com/blog/news/choosing-the-right-macromo-dna-test-comprehensive-comparison">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#macromo">Dated audit</a><details><summary>More sources</summary><a href="https://macromo.gorgias.help/en-US/what-is-whole-genome-sequencing-413029">Source 3</a><a href="https://legal.macromo.com/general-terms-and-conditions">Membership renewal terms</a></details></div>
+          </div></details></td></tr>
+          <tr id="meridian" class="product-row" data-provider="Meridian DNA">
+            <td data-sort="Meridian DNA"><button type="button" class="disclosure" aria-expanded="false" aria-controls="meridian-details" aria-label="Details for Meridian DNA Whole genome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Meridian DNA</span><span class="product">Whole genome · India · age 18+</span></span></td>
+            <td data-sort="">—</td>
+            <td data-sort="64999" data-currency="INR">INR 64,999</td>
+            <td data-sort="">Varies</td>
+            <td data-sort="VCF">VCF</td>
           </tr>
-
-          <tr>
-            <td>YSEQ</td>
-            <td data-sort="WGS++ (150 Gbases, ~50x)">
-              <a href="https://www.yseq.net">WGS++ (150 Gbases, ~50x)</a>
-            </td>
-            <td data-sort="50">~50x</td>
-            <td data-sort="770">€699 (~$770)</td>
-            <td data-sort="26"><span data-toggle="tooltip" title="FAQ states 5-7 months currently">5&ndash;7 months</span></td>
-            <td>100&ndash;150bp</td>
-            <td><span data-toggle="tooltip" title="Y-chromosome SNP VCF annotation">⚠️ </span></td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td></td>
-            <td></td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td><a href="https://www.cegat.de/en/">CeGaT</a> (T&uuml;bingen) / In-house (Berlin)</td>
+          <tr id="meridian-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Meridian DNA Whole genome</summary><div class="detail-content">
+            <h2>Meridian DNA Whole genome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">India; age 18+. Contact/address required before Razorpay. Not diagnostic.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">INR 64,999 one-time<span class="status-note">Home sample collection and 30-minute doctor consultation included; no subscription disclosed.</span></dd>
+              <dt>Results</dt><dd data-field="results">About 4 weeks from sample receipt; terms 2–4 weeks, order copy 14 working days</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: VCF included<span class="status-note">Product and terms conflict on data retention/lifetime re-reading; confirm before ordering.</span><span class="status-note">Terms say provider copy deleted after download; supplier sample/data purged within 30 days of delivery (policy claim).</span></dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">WGS; ~30× product vs ~25× terms</dd>
+              <dt>Sample</dt><dd data-field="sample">Home collection; specimen unspecified</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">30-minute doctor consultation included; genetic-counselor credentials unknown</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Unnamed laboratory partners</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.meridiandna.com/tests/whole-genome">Visit provider</a><a href="https://www.meridiandna.com/terms">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#meridian">Dated audit</a><details><summary>More sources</summary><a href="https://www.meridiandna.com/data-policy">Source 3</a></details></div>
+          </div></details></td></tr>
+          <tr id="mito-3" class="product-row" data-provider="Mito Health">
+            <td data-sort="Mito Health"><button type="button" class="disclosure" aria-expanded="false" aria-controls="mito-3-details" aria-label="Details for Mito Health Sequencing kit" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Mito Health</span><span class="product">Sequencing kit · US only · no Texas</span></span></td>
+            <td data-sort="3">~3×</td>
+            <td data-sort="265.31" data-currency="USD">USD 265.31<span class="secondary">incl. shipping; nonmember</span></td>
+            <td data-sort="14">2–3 weeks</td>
+            <td data-sort="gVCF · FASTQ³">gVCF · FASTQ³</td>
           </tr>
-
-          <tr>
-            <td>24Genetics</td>
-            <td data-sort="Whole Genome Sequencing">
-              <a href="https://24genetics.com">Whole Genome Sequencing</a>
-              <span class="status-note">Includes two 15-minute genetic counseling sessions and a personalized report on a gene/disease of choice.</span>
-            </td>
-            <td data-sort="30">100%</td>
-            <td data-sort="2400">€1,999 (~$2,400)</td>
-            <td data-sort="4.5">3&ndash;6 weeks</td>
-            <td>150bp</td>
-            <td></td>
-            <td></td>
-            <td>✅️</td>
-            <td>✅️</td>
-            <td>CE-IVD / ISO 9001 / ISO 13485</td>
-            <td>Illumina</td>
-            <td>Saliva</td>
-            <td>Madrid / Boston / Cambridge, UK</td>
+          <tr id="mito-3-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Mito Health Sequencing kit</summary><div class="detail-content">
+            <h2>Mito Health Sequencing kit</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US age 18+, own sample only; Texas excluded. No separate physician order. Personal research files, not diagnostic. Email and consent before payment.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 225.31 + USD 40 shipping<span class="status-note">Nonmember cart total USD 265.31. Optional membership is preselected: USD 9/month + USD 160.93 kit price. Turn it off for one-time nonmember purchase; return prepaid.</span></dd>
+              <dt>Results</dt><dd data-field="results">2–3 weeks after lab receives and accepts valid sample; transit excluded</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: gVCF + .genome bundle included<br>Reads: Advertised included; terms say FASTQ may require request</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~3× average (low-pass)</dd>
+              <dt>Sample</dt><dd data-field="sample">Marketed saliva kit; swab instructions conflict</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Not included; general Care Team call is not established genetic counseling</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Genome Computer intermediary; actual lab unknown<br>US CLIA/CAP sequencing partner claimed; lab unnamed, not independently verified</dd>
+            </dl></div>
+            <div class="sources"><a href="https://mitohealth.com/products/whole-genome-sequencing-3x">Visit provider</a><a href="https://mitohealth.com/genetic-services-terms">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#mito-3">Dated audit</a><details><summary>More sources</summary><a href="https://mitohealth.com/consent-genetic-services">Source 3</a><a href="https://mitohealth.com/genomic-data-privacy">WGS laboratory/data policy</a></details></div>
+          </div></details></td></tr>
+          <tr id="mito-30" class="product-row" data-provider="Mito Health">
+            <td data-sort="Mito Health"><button type="button" class="disclosure" aria-expanded="false" aria-controls="mito-30-details" aria-label="Details for Mito Health Sequencing kit" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Mito Health</span><span class="product">Sequencing kit · US only · no Texas</span></span></td>
+            <td data-sort="30">~30×</td>
+            <td data-sort="643.29" data-currency="USD">USD 643.29<span class="secondary">incl. shipping; nonmember</span></td>
+            <td data-sort="14">2–3 weeks</td>
+            <td data-sort="gVCF · FASTQ³">gVCF · FASTQ³</td>
           </tr>
-
-          <tr>
-            <td>GenePlanet</td>
-            <td data-sort="Premium WGS">
-              <a href="https://geneplanet.com">Premium WGS</a>
-              <span class="status-note">Raw data not available. Likely low-pass WGS (coverage depth not disclosed). 30-minute expert consultation included. Pricing varies by region.</span>
-            </td>
-            <td></td>
-            <td data-sort="369">~$369 / ~€299</td>
-            <td data-sort="6">5&ndash;7 weeks</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><span data-toggle="tooltip" title="30-minute expert consultation included (not formal clinical genetic counseling)">⚠️ </span></td>
-            <td>ISO 17025 / ISO 27001</td>
-            <td>Illumina</td>
-            <td>Saliva</td>
-            <td>Slovenia (5 labs globally)</td>
+          <tr id="mito-30-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Mito Health Sequencing kit</summary><div class="detail-content">
+            <h2>Mito Health Sequencing kit</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US age 18+, own sample only; Texas excluded. No separate physician order. Personal research files, not diagnostic. Email and consent before payment.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 603.29 + USD 40 shipping<span class="status-note">Nonmember cart total USD 643.29. Optional membership is preselected: USD 9/month + USD 430.92 kit price. Turn it off for one-time nonmember purchase; return prepaid.</span></dd>
+              <dt>Results</dt><dd data-field="results">2–3 weeks after lab receives and accepts valid sample; transit excluded</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: gVCF + .genome bundle included<br>Reads: Advertised included; terms say FASTQ may require request</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~30× average</dd>
+              <dt>Sample</dt><dd data-field="sample">Marketed saliva kit; swab instructions conflict</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Not included; general Care Team call is not established genetic counseling</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Genome Computer intermediary; actual lab unknown<br>US CLIA/CAP sequencing partner claimed; lab unnamed, not independently verified</dd>
+            </dl></div>
+            <div class="sources"><a href="https://mitohealth.com/products/whole-genome-sequencing-30x">Visit provider</a><a href="https://mitohealth.com/genetic-services-terms">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#mito-30">Dated audit</a><details><summary>More sources</summary><a href="https://mitohealth.com/consent-genetic-services">Source 3</a><a href="https://mitohealth.com/genomic-data-privacy">WGS laboratory/data policy</a></details></div>
+          </div></details></td></tr>
+          <tr id="myheritage" class="product-row" data-provider="MyHeritage">
+            <td data-sort="MyHeritage"><button type="button" class="disclosure" aria-expanded="false" aria-controls="myheritage-details" aria-label="Details for MyHeritage DNA · genealogy" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">MyHeritage</span><span class="product">DNA · genealogy</span></span></td>
+            <td data-sort="2">2×</td>
+            <td data-sort="34" data-currency="USD">USD 34<span class="secondary">incl. USD 5 US shipping</span></td>
+            <td data-sort="21">3–4 weeks</td>
+            <td data-sort="">—</td>
           </tr>
-
-          <tr>
-            <td>Veritas Intercontinental</td>
-            <td data-sort="myGenome">
-              <a href="https://www.veritasint.com">myGenome</a>
-              <span class="status-note">Physician-mediated model (not pure DTC). Available in 30+ countries. Pre- and post-test counseling included. Requires physician prescription.</span>
-            </td>
-            <td data-sort="30">30x</td>
-            <td><span data-toggle="tooltip" title="Historically ~€995; current pricing requires consultation">Contact for pricing</span></td>
-            <td data-sort="13">12&ndash;14 weeks</td>
-            <td></td>
-            <td><span data-toggle="tooltip" title="$99 extra, 5-7 days to process">⚠️ </span></td>
-            <td><span data-toggle="tooltip" title="$500 extra per SNPedia">⚠️ </span></td>
-            <td></td>
-            <td>✅️</td>
-            <td>ISO</td>
-            <td>Illumina NovaSeq 6000</td>
-            <td>Saliva</td>
-            <td>Barcelona, Spain</td>
+          <tr id="myheritage-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for MyHeritage DNA · genealogy</summary><div class="detail-content">
+            <h2>MyHeritage DNA · genealogy</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Genealogy, not a health-report test. Adults, or parent/guardian ordering for a child. Country exclusions in audit. Older array tests are not automatically resequenced.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 29 promotional kit-only (was USD 89)<span class="status-note">US shipping USD 5 observed, plus tax. No required subscription; optional Complete trial/free-shipping offer is separate.</span></dd>
+              <dt>Results</dt><dd data-field="results">3–4 weeks after lab receipt</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">CSV/TXT genotype export is not raw reads.<br>Alignment: CRAM: announced, not yet available (promised free)</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">2× average + imputation</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Technology</dt><dd data-field="technology">Ultima UG100</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Gene by Gene, Houston, Texas<br>Gene by Gene CAP/CLIA certificate copies inspected; live status and genealogy WGS scope unverified</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.myheritage.com/dna">Visit provider</a><a href="https://www.myheritage.com/order/create/MhDna.LandingPage?initialProductId=900&amp;initialCouponCode=&amp;currency=">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#myheritage">Dated audit</a><details><summary>More sources</summary><a href="https://blog.myheritage.com/2025/10/myheritage-upgrades-its-dna-tests-to-whole-genome-sequencing/">Source 2</a><a href="https://www.myheritage.com/help/en/articles/12852457-what-does-the-whole-genome-sequencing-wgs-upgrade-mean-for-my-dna-results">Source 3</a><a href="https://www.myheritage.com/help/en/articles/13130458-who-is-eligible-to-take-a-myheritage-dna-test">Source 5</a><a href="https://www.genebygene.com/">Laboratory certificate links</a></details></div>
+          </div></details></td></tr>
+          <tr id="nucleus-health" class="product-row" data-provider="Nucleus Genomics">
+            <td data-sort="Nucleus Genomics"><button type="button" class="disclosure" aria-expanded="false" aria-controls="nucleus-health-details" aria-label="Details for Nucleus Genomics Health + Preview" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Nucleus Genomics</span><span class="product">Health + Preview · Physician authorization</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="538" data-currency="USD">USD 538<span class="secondary">then USD 39/year</span></td>
+            <td data-sort="28">4–5 weeks</td>
+            <td data-sort="VCF · CRAM · FASTQ">VCF · CRAM · FASTQ</td>
           </tr>
-
-          <!-- Defunct / inactive providers -->
-
-          <tr class="defunct">
-            <td>Nebula Genomics</td>
-            <td>
-              Shut down February 2025. ProPhase Labs filed Chapter 11. See DNA Complete as successor.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr id="nucleus-health-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Nucleus Genomics Health + Preview</summary><div class="detail-content">
+            <h2>Nucleus Genomics Health + Preview</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US order includes provider physician authorization; no outside referral. No samples collected or mailed within New York. Selected international markets; product-specific eligibility is in the audit.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 538 for one kit; USD 1,026 for two<span class="status-note">Includes first-year membership (USD 39/person); renews USD 39/person/year. Free US shipping; tax calculated by address.</span></dd>
+              <dt>Results</dt><dd data-field="results">4–5 weeks after confirmed lab receipt; FAQ also says 4–6 weeks after sending</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: VCF, SV and CNV downloads advertised<br>Alignment: CRAM: advertised<br>Reads: FASTQ download advertised</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30× average per person</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swabs</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">SteadyMD: USD 99 / one-hour session; not included</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Unnamed US lab<br>CAP/CLIA provider claim</dd>
+            </dl></div>
+            <div class="sources"><a href="https://mynucleus.com/health/shop">Visit provider</a><a href="https://mynucleus.com/health">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#nucleus-health">Dated audit</a><details><summary>More sources</summary><a href="https://mynucleus.com/faq">Source 3</a><a href="https://mynucleus.com/whats-included">Source 4</a><a href="https://mynucleus.com/preview/partner-sharing">Source 5</a><a href="https://mynucleus.com/terms-of-service">Source 6</a><a href="https://mynucleus.com/privacy-and-security">Source 7</a><a href="https://mynucleus.com/preview/shop">Source 8</a></details></div>
+          </div></details></td></tr>
+          <tr id="selfdecode-kit" class="product-row" data-provider="SelfDecode">
+            <td data-sort="SelfDecode"><button type="button" class="disclosure" aria-expanded="false" aria-controls="selfdecode-kit-details" aria-label="Details for SelfDecode Kit / Advanced / Ultimate" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">SelfDecode</span><span class="product">Kit / Advanced / Ultimate</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="">From $399<span class="secondary">currency unconfirmed</span></td>
+            <td data-sort="">Varies</td>
+            <td data-sort="VCF · BAM (schema only)">VCF · BAM (schema only)</td>
           </tr>
-
-          <tr class="defunct">
-            <td>Sano Genetics</td>
-            <td>
-              No longer offering consumer WGS. Pivoted to B2B precision medicine / clinical trials.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr id="selfdecode-kit-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for SelfDecode Kit / Advanced / Ultimate</summary><div class="detail-content">
+            <h2>SelfDecode Kit / Advanced / Ultimate</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Consumer; shipping exclusions in audit. Distinct from the standard array/imputation kit.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">$399 kit; $1,499 Advanced; $1,999 Ultimate<span class="status-note">Product dollar currency code not independently confirmed; shipping policy quotes USD 20 per kit. Packages advertise lifetime reports; no mandatory WGS recurring fee found.</span></dd>
+              <dt>Results</dt><dd data-field="results">Conflicting estimates: product 8–12 weeks after lab receipt; WGS help 10–20 business days after receipt (4–6 weeks order-to-results)</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Included<br>Alignment: BAM: advertised in FAQ schema only; confirm</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30× average</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Read layout / length</dt><dd data-field="read-length">Paired-end; bp length unpublished</dd>
+              <dt>Technology</dt><dd data-field="technology">Illumina NGS; model unknown</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">CAP/CLIA sequencing-lab claim; lab unnamed</dd>
+            </dl></div>
+            <div class="sources"><a href="https://selfdecode.com/en/whole-genome-sequencing-wgs/">Visit provider</a><a href="https://selfdecode.com/app/checkout/?product=dna-kit-wgs,free">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#selfdecode-kit">Dated audit</a><details><summary>More sources</summary><a href="https://selfdecode.helpscoutdocs.com/article/980-what-is-whole-genome-sequencing">Source 2</a><a href="https://selfdecode.com/app/checkout/?product=wgs-advanced-package,dna-kit-wgs-bundle,wgs-lifetime-sub">Purchase / order</a><a href="https://selfdecode.com/app/checkout/?product=wgs-advanced-package,wgs-ultimate-package,dna-kit-wgs-bundle">Purchase / order</a><a href="https://selfdecode.helpscoutdocs.com/article/911-ind-how-much-does-shipping-cost">Source 6</a><a href="https://selfdecode.helpscoutdocs.com/article/29-do-we-offer-world-wide-shipping">Source 7</a><a href="https://selfdecode.helpscoutdocs.com/article/981-comparing-sd-wgs-to-other-providers">WGS read layout</a><a href="https://selfdecode.helpscoutdocs.com/article/982-ordering-wgs-how-it-works-timelines-and-faqs">Conflicting WGS timing</a></details></div>
+          </div></details></td></tr>
+          <tr id="sequencing-rare" class="product-row" data-provider="Sequencing.com">
+            <td data-sort="Sequencing.com"><button type="button" class="disclosure" aria-expanded="false" aria-controls="sequencing-rare-details" aria-label="Details for Sequencing.com Report / speed options" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Sequencing.com</span><span class="product">Report / speed options</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="399" data-currency="USD">From USD 399</td>
+            <td data-sort="">Varies</td>
+            <td data-sort="VCF · BAM³ · FASTQ">VCF · BAM³ · FASTQ</td>
           </tr>
-
-          <tr class="defunct">
-            <td>Veritas Genetics (US)</td>
-            <td>
-              Acquired by LetsGetChecked, March 2022. US consumer service discontinued. See Veritas Intercontinental for international availability.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr id="sequencing-rare-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Sequencing.com Report / speed options</summary><div class="detail-content">
+            <h2>Sequencing.com Report / speed options</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Self-service consumer kits; free worldwide shipping advertised, destination eligibility applies.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 399 Rare Disease &amp; Carrier; USD 599 Comprehensive; USD 999 Professional<span class="status-note">One month genome plan included; optional Free Plan retains purchased reports/raw files. Paid renewal price not established.</span><details><summary>Build your own bundle prices</summary><ul><li>1–10 reports USD 399; 11–20 USD 499; 21–30 USD 799; 31+ USD 999.</li><li>Add USD 50 expedited or USD 200 ultra-rapid processing to any base tier.</li></ul></details></dd>
+              <dt>Results</dt><dd data-field="results">Rare / standard: 7–8 weeks; Comprehensive / expedited: 4–6; Professional / ultra-rapid: 2–3. Lab processing clock; start unspecified.</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: VCF included (SNVs, indels, CNVs, SVs, mitochondrial)<br>Alignment: BAM: advertised; request may be required<br>Reads: FASTQ included; no additional download fee</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Cheek swab</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Counselor access mentioned; entitlement/fee unknown. Professional includes coaching, not established genetic counseling</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Unnamed US lab; not Pasadena HQ<br>US lab CAP/CLIA claimed</dd>
+            </dl></div>
+            <div class="sources"><a href="https://get.sequencing.com/shop-all-bundles/">Visit provider</a><a href="https://sequencing.com/order/rare-disease-and-carrier-screen-wgs-bundle?quantity=1">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#sequencing-rare">Dated audit</a><details><summary>More sources</summary><a href="https://get.sequencing.com/comprehensive-health-screen/">Source 2</a><a href="https://sequencing.com/order/comprehensive-health-screen-wgs-expedited-bundle?quantity=1">Purchase / order</a><a href="https://sequencing.com/order/professional-health-screen-wgs-ultra-rapid-bundle?quantity=1">Purchase / order</a><a href="https://get.sequencing.com/build-your-own-bundle/">Source 6</a><a href="https://get.sequencing.com/ultra-rapid-whole-genome-sequencing-wgs-bundle/">Source 7</a></details></div>
+          </div></details></td></tr>
+          <tr id="tellmegen" class="product-row" data-provider="tellmeGen">
+            <td data-sort="tellmeGen"><button type="button" class="disclosure" aria-expanded="false" aria-controls="tellmegen-details" aria-label="Details for tellmeGen Ultra" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">tellmeGen</span><span class="product">Ultra</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="329.99" data-currency="USD">USD 329.99</td>
+            <td data-sort="28">4–6 weeks</td>
+            <td data-sort="VCF · CRAM · FASTQ">VCF · CRAM · FASTQ</td>
           </tr>
-
-          <tr class="defunct">
-            <td>Full Genomes Corporation</td>
-            <td>
-              Likely defunct. Website inaccessible, no evidence of active operations. Listed as "Out of Business" by PitchBook.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr id="tellmegen-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for tellmeGen Ultra</summary><div class="detail-content">
+            <h2>tellmeGen Ultra</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Return the sample from the country of purchase; use the kit within 12 months.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 329.99 (US store; tax included)<span class="status-note">Kit has no required checkout subscription. Updates: 3 months free, then USD/EUR 29.99/year/test. 3 free raw downloads/year, then USD/EUR 4.99 each.</span></dd>
+              <dt>Results</dt><dd data-field="results">4–6 weeks after lab receipt</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Included<br>Alignment: CRAM: included<br>Reads: Included; download quota applies</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30× mean</dd>
+              <dt>Sample</dt><dd data-field="sample">Oral RapiDri swab / collection sticks</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Paid interpretation: USD 39.99 single / USD 89.99 three-pack (US store). Single: emailed answer on one topic, existing tellmeGen results only; not a live session. Doctors/geneticists; genetic-counselor certification unverified.</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Eurofins Genomics Denmark (provider identified)<br>ISO 17025/15189 claimed. DANAK 05-0593: named Eurofins entity accredited; inspected method list does not establish human WGS scope. ISO 15189/CAP/CLIA unverified.</dd>
+            </dl></div>
+            <div class="sources"><a href="https://shop.tellmegen.com/en-us/products/ultra-wgs-dna-kit">Visit provider</a><a href="https://shop.tellmegen.com/en/blogs/tools-and-advice/how-many-times-can-i-download-my-raw-data-if-i-am-an-ultra-user">Source 2</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#tellmegen">Dated audit</a><details><summary>More sources</summary><a href="https://www.tellmegen.com/en/technology-and-laboratory">Source 3</a><a href="https://shop.tellmegen.com/en-us/products/ultra-wgs-dna-kit.js">Source 4</a><a href="https://shop.tellmegen.com/en-us/collections/consultations-and-reports">Consultation prices</a><a href="https://shop.tellmegen.com/en-us/products/simple-consultation">Email consultation scope</a><a href="https://www.tellmegen.com/en/tellmegen-consultation">Interpretation team</a><a href="https://published.danak.dk/register.asp?lang=e&amp;nohead=y&amp;sag=05-0593">DANAK entity status</a><a href="https://danak.org/TEST593">Accredited method list</a></details></div>
+          </div></details></td></tr>
+          <tr id="odin" class="product-row" data-provider="The ODIN">
+            <td data-sort="The ODIN"><button type="button" class="disclosure" aria-expanded="false" aria-controls="odin-details" aria-label="Details for The ODIN Human sequencing" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">The ODIN</span><span class="product">Human sequencing · US only</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="599" data-currency="USD">USD 599<span class="secondary">+ shipping/tax</span></td>
+            <td data-sort="14">2–3 weeks</td>
+            <td data-sort="VCF · BAM · FASTQ">VCF · BAM · FASTQ</td>
           </tr>
-
-          <tr class="defunct">
-            <td>Genomics Personalized Health</td>
-            <td>
-              Likely inactive. Website has SSL errors, no recent activity found.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr id="odin-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for The ODIN Human sequencing</summary><div class="detail-content">
+            <h2>The ODIN Human sequencing</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">US only; choose Human. Guest checkout; contact details before payment.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">USD 599 + shipping/tax<span class="status-note">No recurring fee advertised. Contamination may require paid resequencing; fee unknown.</span></dd>
+              <dt>Results</dt><dd data-field="results">2–3 weeks from sample receipt; expedited on request</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Included<span class="status-note">Retain option: later access by contacting ODIN. Delete option: all copies removed within 30 days after delivery (policy claim).</span><br>Alignment: BAM: included<br>Reads: Included</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30×</dd>
+              <dt>Sample</dt><dd data-field="sample">Human saliva or blood</dd>
+              <dt>Read layout / length</dt><dd data-field="read-length">2 × 150 bp paired-end</dd>
+              <dt>Technology</dt><dd data-field="technology">Illumina PE150; model unknown</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Consultant included; genetic-counselor qualification unknown</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.the-odin.com/whole-genome-sequencing-30x/">Visit provider</a><a href="https://www.the-odin.com/checkout">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#odin">Dated audit</a><details><summary>More sources</summary><a href="https://www.the-odin.com/privacy-policy-for-wgs/">WGS retention choices</a></details></div>
+          </div></details></td></tr>
+          <tr id="veritas-mygenome-premium" class="product-row" data-provider="Veritas Intercontinental">
+            <td data-sort="Veritas Intercontinental"><button type="button" class="disclosure" aria-expanded="false" aria-controls="veritas-mygenome-premium-details" aria-label="Details for Veritas Intercontinental myGenome" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">Veritas Intercontinental</span><span class="product">myGenome · Doctor consultation</span></span></td>
+            <td data-sort="30">30×</td>
+            <td data-sort="1950" data-currency="EUR">EUR 1,950</td>
+            <td data-sort="84">12–14 weeks</td>
+            <td data-sort="VCF: EUR 99">VCF: EUR 99</td>
           </tr>
+          <tr id="veritas-mygenome-premium-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for Veritas Intercontinental myGenome</summary><div class="detail-content">
+            <h2>Veritas Intercontinental myGenome</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Healthy adults; provider-arranged prescribing consultation included. Purchase → consultation/prescription → saliva kit. Standard cart asks for “Prescribing Doctor”; self-referral handling is not explained. Do not invent a doctor name. Regional eligibility applies.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">EUR 1,950 (Spain checkout)<span class="status-note">Pre/post counseling included. Optional Genome Life plans; VCF EUR 99 standalone per data-access page, not included in kit price.</span></dd>
+              <dt>Results</dt><dd data-field="results">12–14 weeks after sample receipt (FAQ); ordering page says maximum 16 weeks</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: EUR 99 standalone; Genome Life 25% discount / Genome Life Premium free</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">30× average</dd>
+              <dt>Sample</dt><dd data-field="sample">Saliva</dd>
+              <dt>Technology</dt><dd data-field="technology">Illumina NovaSeq 6000</dd>
+              <dt>Counseling / interpretation</dt><dd data-field="counseling">Pre/post genetic counseling included</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.veritasint.com/genetic-test/mygenome/">Visit provider</a><a href="https://www.veritasint.com/checkout/?add-to-cart=8671">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#veritas-mygenome-premium">Dated audit</a><details><summary>More sources</summary><a href="https://www.veritasint.com/myGenome/">Source 2</a><a href="https://info.veritasint.com/solicitar-asesoramiento-genetico">Source 3</a><a href="https://www.veritasint.com/mygenome-experience/">Source 4</a><a href="https://www.veritasint.com/genetic-test/mygenome-premium/">Source 5</a></details></div>
+          </div></details></td></tr>
+          <tr id="yseq-wgs" class="product-row" data-provider="YSEQ">
+            <td data-sort="YSEQ"><button type="button" class="disclosure" aria-expanded="false" aria-controls="yseq-wgs-details" aria-label="Details for YSEQ WGS" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">YSEQ</span><span class="product">WGS</span></span></td>
+            <td data-sort="15">~15×</td>
+            <td data-sort="359" data-currency="EUR">EUR 359</td>
+            <td data-sort="150">5–7 months¹</td>
+            <td data-sort="BAM · FASTQ">BAM · FASTQ</td>
+          </tr>
+          <tr id="yseq-wgs-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for YSEQ WGS</summary><div class="detail-content">
+            <h2>YSEQ WGS</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Genealogy/personal research, not clinical. Worldwide shipping advertised; own account per tested person and written consent required.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">EUR 359<span class="status-note">Free downloads; no recurring fee stated. Optional microSD EUR 60 + shipping; up to 10 Y-SNP Sanger confirmations EUR 100.</span></dd>
+              <dt>Results</dt><dd data-field="results">5–7 months; FAQ dated 2025-03-11, current estimate unconfirmed; start unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Y-SNP annotation only; not genome-wide VCF<br>Alignment: BAM: included<br>Reads: Included</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~15× estimated from 45 Gb raw output; bacterial contamination can lower mapped human depth.</dd>
+              <dt>Sample</dt><dd data-field="sample">Buccal / cheek cells</dd>
+              <dt>Read layout / length</dt><dd data-field="read-length">100 or 150 bp paired-end</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Berlin extraction/library prep; sequencing operator unknown</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.yseq.net/product_info.php?cPath=29&amp;products_id=42468">Visit provider</a><a href="https://www.yseq.net/checkout_shipping.php">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#yseq-wgs">Dated audit</a><details><summary>More sources</summary><a href="https://www.yseq.net/faq.php">Source 2</a><a href="https://www.yseq.net/index.php?cPath=29">Source 3</a><a href="https://www.yseq.net/shopping_cart.php">Source 4</a><a href="https://www.yseq.net/shipping.php">Source 6</a></details></div>
+          </div></details></td></tr>
+          <tr id="yseq-plus" class="product-row" data-provider="YSEQ">
+            <td data-sort="YSEQ"><button type="button" class="disclosure" aria-expanded="false" aria-controls="yseq-plus-details" aria-label="Details for YSEQ WGS+" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">YSEQ</span><span class="product">WGS+</span></span></td>
+            <td data-sort="30">~30×</td>
+            <td data-sort="399" data-currency="EUR">EUR 399</td>
+            <td data-sort="150">5–7 months¹</td>
+            <td data-sort="BAM · FASTQ">BAM · FASTQ</td>
+          </tr>
+          <tr id="yseq-plus-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for YSEQ WGS+</summary><div class="detail-content">
+            <h2>YSEQ WGS+</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Genealogy/personal research, not clinical. Worldwide shipping advertised; own account per tested person and written consent required.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">EUR 399<span class="status-note">Free downloads; no recurring fee stated. Optional microSD EUR 60 + shipping; up to 10 Y-SNP Sanger confirmations EUR 100.</span></dd>
+              <dt>Results</dt><dd data-field="results">5–7 months; FAQ dated 2025-03-11, current estimate unconfirmed; start unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Y-SNP annotation only; not genome-wide VCF<br>Alignment: BAM: included<br>Reads: Included</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~30× estimated from 90 Gb raw output; bacterial contamination can lower mapped human depth.</dd>
+              <dt>Sample</dt><dd data-field="sample">Buccal / cheek cells</dd>
+              <dt>Read layout / length</dt><dd data-field="read-length">100 or 150 bp paired-end</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Berlin extraction/library prep; sequencing operator unknown</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.yseq.net/product_info.php?cPath=29&amp;products_id=129554">Visit provider</a><a href="https://www.yseq.net/checkout_shipping.php">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#yseq-plus">Dated audit</a><details><summary>More sources</summary><a href="https://www.yseq.net/faq.php">Source 2</a><a href="https://www.yseq.net/index.php?cPath=29">Source 3</a><a href="https://www.yseq.net/shopping_cart.php">Source 4</a><a href="https://www.yseq.net/shipping.php">Source 6</a></details></div>
+          </div></details></td></tr>
+          <tr id="yseq-plusplus" class="product-row" data-provider="YSEQ">
+            <td data-sort="YSEQ"><button type="button" class="disclosure" aria-expanded="false" aria-controls="yseq-plusplus-details" aria-label="Details for YSEQ WGS++" hidden><span class="chevron" aria-hidden="true"></span></button><span class="test-label"><span class="provider">YSEQ</span><span class="product">WGS++</span></span></td>
+            <td data-sort="50">~50×</td>
+            <td data-sort="699" data-currency="EUR">EUR 699</td>
+            <td data-sort="150">5–7 months¹</td>
+            <td data-sort="BAM · FASTQ">BAM · FASTQ</td>
+          </tr>
+          <tr id="yseq-plusplus-details" class="detail-row"><td colspan="5"><details class="product-details"><summary>Details for YSEQ WGS++</summary><div class="detail-content">
+            <h2>YSEQ WGS++</h2><div class="detail-grid"><dl>
+              <dt>Buying</dt><dd data-field="buying">Genealogy/personal research, not clinical. Worldwide shipping advertised; own account per tested person and written consent required.</dd>
+              <dt>Costs &amp; options</dt><dd data-field="costs">EUR 699<span class="status-note">Free downloads; no recurring fee stated. Optional microSD EUR 60 + shipping; up to 10 Y-SNP Sanger confirmations EUR 100.</span></dd>
+              <dt>Results</dt><dd data-field="results">5–7 months; FAQ dated 2025-03-11, current estimate unconfirmed; start unknown</dd>
+              <dt>Files &amp; access</dt><dd data-field="files">Variants: Y-SNP annotation only; not genome-wide VCF<br>Alignment: BAM: included<br>Reads: Included</dd>
+            </dl><dl>
+              <dt>Sequencing</dt><dd data-field="assay">~50× estimated from 150 Gb raw output; bacterial contamination can lower mapped human depth.</dd>
+              <dt>Sample</dt><dd data-field="sample">Buccal / cheek cells</dd>
+              <dt>Read layout / length</dt><dd data-field="read-length">100 or 150 bp paired-end</dd>
+              <dt>Laboratory &amp; evidence</dt><dd data-field="laboratory">Berlin extraction/library prep; sequencing operator unknown</dd>
+            </dl></div>
+            <div class="sources"><a href="https://www.yseq.net/product_info.php?cPath=29&amp;products_id=129555">Visit provider</a><a href="https://www.yseq.net/checkout_shipping.php">Purchase / order</a><a href="https://github.com/beaugunderson/which-genome/blob/master/research/2026-09-08.md#yseq-plusplus">Dated audit</a><details><summary>More sources</summary><a href="https://www.yseq.net/faq.php">Source 2</a><a href="https://www.yseq.net/index.php?cPath=29">Source 3</a><a href="https://www.yseq.net/shopping_cart.php">Source 4</a><a href="https://www.yseq.net/shipping.php">Source 6</a></details></div>
+          </div></details></td></tr>
         </tbody>
       </table>
-    </div><!-- .table-wrapper -->
-
-    <div class="container help-wanted">
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Help wanted:</h4>
-
-          <ul>
-            <li>Any historical marketing material from a
-              <abbr title="direct-to-consumer">DTC</abbr>
-              <abbr title="whole genome sequence">WGS</abbr>/<abbr title="whole exome sequence">WES</abbr>
-              provider, especially materials that show prices</li>
-            <li>Any marketing material or screenshots that can be used as evidence for any of the data points above</li>
-            <li>Consumer experiences with any of the listed providers (were they on time? did they give you your data without hassle?)</li>
-            <li>Any providers I've missed, or information that has become out of date</li>
-          </ul>
-        </div>
-      </div>
     </div>
-
-    <footer class="border-top footer">
-      <div class="row">
-        <div class="col-12 col-md">
-          Contribute on <a
-          href="https://github.com/beaugunderson/which-genome">GitHub</a>, or
-        send me a <a href="https://twitter.com/beaugunderson">tweet</a> with
-        corrections.
-        </div>
-      </div>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script>
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-
-        var $table = $('#services-table');
-        var $headers = $table.find('thead th');
-
-        $headers.each(function () {
-          $(this).append('<span class="sort-hint">\u25B2\u25BC</span>');
-        });
-
-        $headers.on('click', function () {
-          var $th = $(this);
-          var colIndex = $th.index();
-          var currentDir = $th.attr('data-sort-dir');
-          var newDir = currentDir === 'asc' ? 'desc' : 'asc';
-
-          $headers.removeAttr('data-sort-dir').find('.sort-arrow').remove();
-          $headers.find('.sort-hint').show();
-          $th.find('.sort-hint').hide();
-          $th.attr('data-sort-dir', newDir);
-          $th.append('<span class="sort-arrow">' + (newDir === 'asc' ? ' \u25B2' : ' \u25BC') + '</span>');
-
-          var $tbody = $table.find('tbody');
-          var rows = $tbody.find('tr:not(.defunct)').toArray();
-          var defunct = $tbody.find('tr.defunct').toArray();
-
-          rows.sort(function (a, b) {
-            var aCell = $(a).children('td').eq(colIndex);
-            var bCell = $(b).children('td').eq(colIndex);
-            var aVal = aCell.attr('data-sort');
-            var bVal = bCell.attr('data-sort');
-
-            if (aVal === undefined) aVal = aCell.text().trim();
-            if (bVal === undefined) bVal = bCell.text().trim();
-
-            var aEmpty = aVal === '';
-            var bEmpty = bVal === '';
-            if (aEmpty && bEmpty) return 0;
-            if (aEmpty) return 1;
-            if (bEmpty) return -1;
-
-            var aNum = parseFloat(aVal);
-            var bNum = parseFloat(bVal);
-            if (!isNaN(aNum) && !isNaN(bNum)) {
-              return newDir === 'asc' ? aNum - bNum : bNum - aNum;
-            }
-
-            var cmp = aVal.localeCompare(bVal);
-            return newDir === 'asc' ? cmp : -cmp;
-          });
-
-          $.each(rows, function (_, row) { $tbody.append(row); });
-          $.each(defunct, function (_, row) { $tbody.append(row); });
-        });
-      })
-    </script>
-  </body>
+    <p class="legend">— = not established, not “no.” Unlisted formats remain unverified, not unavailable. Results usually run from sample receipt; expand for exact clocks. ¹ YSEQ’s March 2025 estimate, current timing unconfirmed. ² Maximum report deadline, not typical turnaround. ³ Request may be required.</p>
+  </main>
+  <footer>
+    Provider claims, not independent quality ratings.
+    <details><summary>How to compare</summary>
+      <ul>
+        <li>Individual credit-card purchases only. Provider-arranged doctor consultations are allowed; outside-referral-only, quote-only, business and study services are excluded.</li>
+        <li>Depth is not breadth or a quality score. Exome tests target coding regions; low-pass sequencing often uses imputation.</li>
+        <li>Price groups stay alphabetic by native currency in either sort direction; no FX conversion. First-year obligatory fees are included, not lifetime costs. Dante sorts by its USD base option. SelfDecode’s dollar currency is unconfirmed. Shipping, tax and eligibility can change totals.</li>
+        <li>Unknown sort values stay last; ties retain source order. Numeric ranges use the lower comparable value. Weeks convert to seven days and months to thirty; working days, conflicting estimates and maximum-only deadlines have no numeric timing key.</li>
+        <li>BAM and CRAM are distinct alignment files; VCF/gVCF are variants and FASTQ contains reads. Announced downloads are not available-file promises.</li>
+        <li>CAP accreditation, CLIA certification and ISO standards differ. A wellness coach, doctor or consultant is not necessarily a genetic counselor. Evidence limits and named-lab claims are in each expansion and the audit.</li>
+        <li>No purchases or sequence-quality tests were performed. Retail access does not establish fulfillment. Missing evidence does not prove closure. Please do not share personal genetic data in corrections.</li>
+      </ul>
+    </details>
+  </footer>
+</body>
 </html>
